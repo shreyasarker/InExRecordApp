@@ -11801,11 +11801,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Shreya\\Project 2\\InExRecordApp\\InExRecordApp\\InExRecordApp.csproj",
+      "projectUniqueName": "D:\\Shreya\\Project2\\InExRecordApp\\InExRecordApp\\InExRecordApp.csproj",
       "projectName": "InExRecordApp",
-      "projectPath": "D:\\Shreya\\Project 2\\InExRecordApp\\InExRecordApp\\InExRecordApp.csproj",
+      "projectPath": "D:\\Shreya\\Project2\\InExRecordApp\\InExRecordApp\\InExRecordApp.csproj",
       "packagesPath": "C:\\Users\\Web App Develop .Net\\.nuget\\packages\\",
-      "outputPath": "D:\\Shreya\\Project 2\\InExRecordApp\\InExRecordApp\\obj\\",
+      "outputPath": "D:\\Shreya\\Project2\\InExRecordApp\\InExRecordApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
