@@ -23,3 +23,10 @@ D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\Razor\Vie
 D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
 D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\InExRecordApp.RazorTargetAssemblyInfo.cache
 D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\InExRecordApp.RazorTargetAssemblyInfo.cs
+D:\Shreya\Project2\InExRecordApp\InExRecordApp\bin\Debug\netcoreapp2.1\InExRecordApp.pdb
+D:\Shreya\Project2\InExRecordApp\InExRecordApp\bin\Debug\netcoreapp2.1\InExRecordApp.Views.dll
+D:\Shreya\Project2\InExRecordApp\InExRecordApp\bin\Debug\netcoreapp2.1\InExRecordApp.Views.pdb
+D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\InExRecordApp.Views.pdb
+D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\InExRecordApp.dll
+D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\InExRecordApp.pdb
+D:\Shreya\Project2\InExRecordApp\InExRecordApp\obj\Debug\netcoreapp2.1\InExRecordApp.csproj.CopyComplete
