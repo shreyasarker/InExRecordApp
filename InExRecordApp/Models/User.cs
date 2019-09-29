@@ -12,20 +12,28 @@ namespace InExRecordApp.Models
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName = "varchar(100)")]
+
+        [Column(TypeName = "nvarchar(250)")]
         [Required]
         public string Name { get; set; }
-        [Column(TypeName = "varchar(100)")]
+
+        [Column(TypeName = "varchar(250)")]
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
         [Column(TypeName = "varchar(100)")]
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
+
         [Column(TypeName = "varchar(11)")]
         [Required]
         public string ContactNo { get; set; }
+
         [Column(TypeName = "text")]
         public string Address { get; set; }
+
         [Column(TypeName = "varchar(100)")]
         [Required]
         public string Designation { get; set; }

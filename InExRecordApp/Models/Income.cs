@@ -11,29 +11,35 @@ namespace InExRecordApp.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Column(TypeName = "int")]
         [Required]
         public int UserId { get; set; }
+        public User User { get; set; }
+
         [Column(TypeName = "varchar(20)")]
         [Required]
         public string IncomeType { get; set; }
-        [Column(TypeName = "float(20)")]
+
+        [Column(TypeName = "money")]
         [Required]
-        public decimal Amount { get; set; }
+        public double Amount { get; set; }
+
         [Column(TypeName = "varchar(100)")]
-        [Required]
         public string ChequeNo { get; set; }
-        [Column (TypeName = "varchar(100)")]
-        [Required]
+
+        [Column (TypeName = "varchar(250)")]
         public string BankName { get; set; }
+
         [Column(TypeName = "text")]
-        [Required]
         public string Particular { get; set; }
+
         [Column(TypeName = "datetime")]
         [Required]
         public DateTime Date { get; set; }
-        [Column(TypeName = "int")]
+
+        [Column(TypeName = "bit")]
         [Required]
-        public int IsApproved { get; set; }
+        public bool IsApproved { get; set; }
     }
 }
