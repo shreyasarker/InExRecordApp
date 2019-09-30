@@ -24,18 +24,17 @@ namespace InExRecordApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(User aUser)
+        public IActionResult Index(User aUser)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(aUser);
             }
             var user = CheckLogin(aUser.Email, aUser.Password);
             if (user == null)
             {
-                TempData["status"] = "error";
-                TempData["message"] = "Email or password is invalid";
-                return View();
+                ViewBag.Error = "Email or password is invalid";
+                return View(aUser);
             }
             HttpContext.Session.SetInt32("userId", user.Id);
             return RedirectToAction("Index", "LandingPage");

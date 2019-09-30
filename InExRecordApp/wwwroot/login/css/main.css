@@ -58,10 +58,10 @@ a:focus {
 	outline: none !important;
 }
 
-a:hover {
-	text-decoration: none;
-  color: #57b846;
-}
+    a:hover {
+        text-decoration: none;
+        color: lightseagreen;
+    }
 
 /*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
@@ -183,13 +183,12 @@ iframe {
 
 
 .wrap-login100 {
-  width: 670px;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 2px 5px 24px 3px #888888;
-
+    width: 670px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 2px 5px 24px 3px #aad2d8;
 }
 
 /*==================================================================
@@ -263,7 +262,7 @@ iframe {
 
 .label-input100 {
   font-family: Poppins-Regular;
-  font-size: 15px;
+  font-size: 17px;
   color: #808080;
   line-height: 1.2;
   text-align: right;
@@ -312,7 +311,7 @@ iframe {
   -moz-transition: all 0.6s;
   transition: all 0.6s;
 
-  background: #57b846;
+  background: lightseagreen;
 }
 
 
@@ -378,7 +377,7 @@ input.input100 {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-  color: #57b846;
+    color: lightseagreen;
 }
 
 /*------------------------------------------------------------------
@@ -394,28 +393,26 @@ input.input100 {
 }
 
 .login100-form-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  min-width: 160px;
-  height: 50px;
-  background-color: #57b846;
-  border-radius: 25px;
-
-  font-family: Poppins-Regular;
-  font-size: 16px;
-  color: #fff;
-  line-height: 1.2;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-  transition: all 0.4s;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 160px;
+    height: 50px;
+    background-color: lightseagreen;
+    border-radius: 25px;
+    font-family: Poppins-Regular;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
 }
 
 .login100-form-btn:hover {
@@ -514,5 +511,7 @@ input.input100 {
     opacity: 1;
   }
 }
-
+.error-text {
+    font-size: 15px
+}
 

@@ -11,16 +11,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <link rel="icon" type="image/png" href="~/login/images/icons/favicon.ico" />
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/lib/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/css/util.css">
-    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/login/css/main.css">
     <!--===============================================================================================-->
 </head>
 <body>
@@ -28,38 +28,42 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <div class="login100-form-title" style="background-image: url(~/images/bg-01.jpg);">
+            <div class="login100-form-title" style="background-image: url(./login/images/bg-01.jpg);">
                 <span class="login100-form-title-1">
                     Login to InExRecord
                 </span>
             </div>
-            @if (TempData["status"] != null && TempData["status"].ToString() == "error")
+            @if (ViewBag.Error != "")
             {
-                <div class="alert alert-danger alert-dismissible">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Error!</strong> @TempData["messgae"].ToString()
-                </div>
+            <span class="text-danger">@ViewBag.Error</span>
             }
-            <form method="post" asp-controller="Login" asp-action="Login" class="login100-form validate-form">
+            <form method="post" asp-controller="Login" asp-action="Index" class="login100-form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                <div class="wrap-input100 validate-input m-b-26">
                     <span class="label-input100">Email</span>
                     <input asp-for="Email" class="input100" type="text" placeholder="Enter email address">
                     <span class="focus-input100"></span>
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <span asp-validation-for="Email" class="error-text text-danger"></span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                <div class="wrap-input100 validate-input m-b-18">
                     <span class="label-input100">Password</span>
                     <input asp-for="Password" class="input100" type="password" placeholder="Enter password">
                     <span class="focus-input100"></span>
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <span asp-validation-for="Password" class="error-text text-danger"></span>
                 </div>
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" type="submit">
-                        Login
-                    </button>
+                    <div class="col-md-6">
+                        <button class="login100-form-btn" type="submit">
+                            Login
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <a asp-action="Index" asp-controller="LandingPage" class="login100-form-btn">
+                            Back to Main Page
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>
