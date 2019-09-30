@@ -33,10 +33,15 @@
                     Login to InExRecord
                 </span>
             </div>
-            @if (ViewBag.Error != "")
+
+            @if (TempData.ContainsKey("error"))
             {
-            <span class="text-danger">@ViewBag.Error</span>
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> @TempData["error"].ToString()
+                </div>
             }
+           
             <form method="post" asp-controller="Login" asp-action="Index" class="login100-form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="wrap-input100 validate-input m-b-26">

@@ -33,11 +33,11 @@ namespace InExRecordApp.Controllers
             var user = CheckLogin(aUser.Email, aUser.Password);
             if (user == null)
             {
-                ViewBag.Error = "Email or password is invalid";
+                TempData["Error"] = "Email or password is invalid";
                 return View(aUser);
             }
             HttpContext.Session.SetInt32("userId", user.Id);
-            return RedirectToAction("Index", "LandingPage");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         private User CheckLogin(string email, string password)

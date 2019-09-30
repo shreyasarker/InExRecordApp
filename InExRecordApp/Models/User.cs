@@ -14,28 +14,25 @@ namespace InExRecordApp.Models
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(250)")]
-        [Required]
         public string Name { get; set; }
 
         [Column(TypeName = "varchar(250)")]
-        [Required]
+        [Required(ErrorMessage = "Email is required")]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
             ErrorMessage = "Invalid email format")]
         public string Email { get; set; }
 
         [Column(TypeName = "varchar(100)")]
-        [Required]
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
         [Column(TypeName = "varchar(11)")]
-        [Required]
         public string ContactNo { get; set; }
 
         [Column(TypeName = "text")]
         public string Address { get; set; }
 
         [Column(TypeName = "varchar(100)")]
-        [Required]
         public string Designation { get; set; }
     }
 }
