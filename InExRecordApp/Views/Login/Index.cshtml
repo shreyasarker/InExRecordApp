@@ -1,0 +1,72 @@
+﻿@model User
+
+@{
+    Layout = null;
+    string Title = "Login-InExRecordApp";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(~/images/bg-01.jpg);">
+                <span class="login100-form-title-1">
+                    Login to InExRecord
+                </span>
+            </div>
+            @if (TempData["status"] != null && TempData["status"].ToString() == "error")
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> @TempData["messgae"].ToString()
+                </div>
+            }
+            <form method="post" asp-controller="Login" asp-action="Login" class="login100-form validate-form">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                    <span class="label-input100">Email</span>
+                    <input asp-for="Email" class="input100" type="text" placeholder="Enter email address">
+                    <span class="focus-input100"></span>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                    <span class="label-input100">Password</span>
+                    <input asp-for="Password" class="input100" type="password" placeholder="Enter password">
+                    <span class="focus-input100"></span>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
