@@ -9,7 +9,7 @@ namespace InExRecordApp.Controllers
 {
     public class DashboardController : Controller
     {
-        public IActionResult Index()
+        public IActionResult UserProfile()
         {
             ViewBag.UserId = HttpContext.Session.GetInt32("userId");
             return View();

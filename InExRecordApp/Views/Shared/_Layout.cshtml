@@ -24,6 +24,7 @@
     {
         <link href="~/main/style.css" rel="stylesheet">
         <link href="~/main/css/responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     }
 </head>
 <body>
@@ -37,26 +38,29 @@
     }
 
     @RenderBody()
-    
+
     @if (controller != "Login")
     {
         <partial name="_Footer" />
     }
-    
+
     @if (controller == "Login")
     {
-    <script src="~/lib/jquery/jquery-3.2.1.min.js"></script>
+        <script src="~/lib/jquery/jquery-3.2.1.min.js"></script>
     }
     else
     {
         <script src="~/main/js/jquery-2.2.4.min.js"></script>
         <script src="~/main/js/popper.min.js"></script>
         <script src="~/main/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="~/main/js/plugins.js"></script>
         <script src="~/main/js/active.js"></script>
     }
 
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
