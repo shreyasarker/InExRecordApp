@@ -1,29 +1,8 @@
 ﻿@model User
 
 @{
-    Layout = null;
-    string Title = "Login-InExRecordApp";
+    ViewBag.Title = "Login";
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>@Title</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="~/login/images/icons/favicon.ico" />
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/lib/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/lib/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-    <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="~/login/css/util.css">
-    <link rel="stylesheet" type="text/css" href="~/login/css/main.css">
-    <!--===============================================================================================-->
-</head>
-<body>
 
 <div class="limiter">
     <div class="container-login100" style="background-image: url(./login/images/background.jpg); background-position: center;background-repeat: no-repeat;background-size: cover;">
@@ -41,7 +20,7 @@
                     <strong>Error!</strong> @TempData["error"].ToString()
                 </div>
             }
-           
+
             <form method="post" asp-controller="Login" asp-action="Index" class="login100-form">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="wrap-input100 validate-input m-b-26">
@@ -74,8 +53,3 @@
         </div>
     </div>
 </div>
-<script src="~/lib/jquery/jquery-3.2.1.min.js"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-</body>
-</html>

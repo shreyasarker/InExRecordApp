@@ -67,7 +67,7 @@ namespace InExRecordApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=LandingPage}/{action=Index}");
+                    template: "{controller=LandingPage}/{action=Index}/{id?}");
             });
         }
     }

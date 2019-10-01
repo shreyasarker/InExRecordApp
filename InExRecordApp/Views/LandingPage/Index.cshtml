@@ -1,223 +1,54 @@
-﻿
-@{
-    Layout = null;
-    string Title = "Landing Page-InExRecordApp";
+﻿@{
+    ViewBag.Title = "Landing Page";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <!-- Title -->
-    <title>@Title-InExRecord</title>
-
-    <!-- Core Stylesheet -->
-    <link href="~/landing/style.css" rel="stylesheet">
-
-    <!-- Responsive CSS -->
-    <link href="~/landing/css/responsive.css" rel="stylesheet">
-
-</head>
-
-<body>
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="mosh-preloader"></div>
-    </div>
-
-    <!-- ***** Header Area Start ***** -->
-    <header class="header_area clearfix" style="background: lightseagreen;">
-        <div class="container-fluid h-100">
-            <div class="row h-100">
-                <!-- Menu Area Start -->
-                <div class="col-12 h-100">
-                    <div class="menu_area h-100">
-                        <nav class="navbar h-100 navbar-expand-lg align-items-center">
-                            <!-- Logo -->
-                            <a class="navbar-brand" href="javascript:void(0);" style="color: white;">
-                                InExRecord
-                            </a>
-
-                            <!-- Menu Area -->
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mosh-navbar" aria-controls="mosh-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-
-                            <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
-                                <div class="login-register-btn">
-                                    <a asp-action="Index" asp-controller="Login" style="color: white;font-size: 18px;">Login</a>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
+<section class="mosh-workflow-area section_padding_100_0 clearfix" style="margin-top: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading text-center mb-0">
+                    <p>The best app to store daily income and expense</p>
+                    <h2>Features of this app</h2>
                 </div>
             </div>
         </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-    <!-- ***** Workflow Area Start ***** -->
-    <section class="mosh-workflow-area section_padding_100_0 clearfix" style="margin-top: 50px;">
+    </div>
+
+    <div class="workflow-img">
+        <img src="~/landing/img/core-img/work-progress.png" alt="">
+    </div>
+
+    <div class="workflow-slides-area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section-heading text-center mb-0">
-                        <p>The best app to store daily income and expense</p>
-                        <h2>Features of this app</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="workflow-img">
-            <img src="~/landing/img/core-img/work-progress.png" alt="">
-        </div>
-
-        <div class="workflow-slides-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="mosh-workflow-slides owl-carousel">
-                            <!-- Single Service Area -->
-                            <div class="single-workflow-area d-flex">
-                                <div class="workflow-content ml-15">
-                                    <h4>Record Income</h4>
-                                    <p>Companies can keep daily incomes for different purposes using cash or cheque.</p>
-                                </div>
+                    <div class="mosh-workflow-slides owl-carousel">
+                        <!-- Single Service Area -->
+                        <div class="single-workflow-area d-flex">
+                            <div class="workflow-content ml-15">
+                                <h4>Record Income</h4>
+                                <p>Companies can keep daily incomes for different purposes using cash or cheque.</p>
                             </div>
-                            <!-- Single Service Area -->
-                            <div class="single-workflow-area d-flex">
-                                <div class="workflow-content ml-15">
-                                    <h4>Record Expense</h4>
-                                    <p>Companies can keep daily expense for different purposes using cash or cheque.</p>
-                                </div>
+                        </div>
+                        <!-- Single Service Area -->
+                        <div class="single-workflow-area d-flex">
+                            <div class="workflow-content ml-15">
+                                <h4>Record Expense</h4>
+                                <p>Companies can keep daily expense for different purposes using cash or cheque.</p>
                             </div>
-                            <!-- Single Service Area -->
-                            <div class="single-workflow-area d-flex">
-                                <div class="workflow-content ml-15">
-                                    <h4>Generate Reports</h4>
-                                    <p>Companies can generate monthly income and expense report with yearly profit reports.</p>
-                                </div>
+                        </div>
+                        <!-- Single Service Area -->
+                        <div class="single-workflow-area d-flex">
+                            <div class="workflow-content ml-15">
+                                <h4>Generate Reports</h4>
+                                <p>Companies can generate monthly income and expense report with yearly profit reports.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- ***** Footer Area Start ***** -->
-    <footer class="footer-area clearfix">
-        <!-- Top Fotter Area -->
-        <div class="top-footer-area section_padding_100_0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-100">
-                            <a href="#" class="mb-50 d-block" style="color: white;">
-                                About InExRecord
-                            </a>
-                            <p>The best application for companies to keep their daily income and expense record and generate reports.</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-100">
-                            <a href="#" class="mb-50 d-block" style="color: white;">
-                                About Code Vince
-                            </a>
-                            <p>Code Vince is responsible to develop the InRexRecord to provide companies the best business solutions.</p>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-100">
-                            <a href="#" class="mb-50 d-block" style="color: white;">
-                                Social Profiles
-                            </a>
-                            <div class="footer-single-contact-info d-flex">
-                                <div class="contact-icon">
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                </div>
-                                <p>Facebook</p>
-                            </div>
-                            <div class="footer-single-contact-info d-flex">
-                                <div class="contact-icon">
-                                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                                </div>
-                                <p>Pinterest</p>
-                            </div>
-                            <div class="footer-single-contact-info d-flex">
-                                <div class="contact-icon">
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </div>
-                                <p>Twitter</p>
-                            </div>
-                        </div>
-                     </div>
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-footer-widget mb-100">
-                            <a href="#" class="mb-50 d-block" style="color: white;">
-                                Contact Us
-                            </a>
-                            <div class="footer-single-contact-info d-flex">
-                                <div class="contact-icon">
-                                    <img src="~/landing/img/core-img/map.png" alt="">
-                                </div>
-                                <p>Dhaka, Bangladesh</p>
-                            </div>
-                            <div class="footer-single-contact-info d-flex">
-                                <div class="contact-icon">
-                                    <img src="~/landing/img/core-img/call.png" alt="">
-                                </div>
-                                <p>Main: 203-808-8613 <br> Office: 203-808-8648
-                                </p>
-                            </div>
-                            <div class="footer-single-contact-info d-flex">
-                                <div class="contact-icon">
-                                    <img src="~/landing/img/core-img/message.png" alt="">
-                                </div>
-                                <p>info@codevince.com</p>
-                            </div>
-                        </div>
-                    </div>
-                        
-                    </div>
-                </div>
-        </div>
-        <!-- Fotter Bottom Area -->
-        <div class="footer-bottom-area">
-            <div class="container h-100">
-                <div class="row h-100">
-                    <div class="col-12 h-100">
-                        <div class="footer-bottom-content h-100 d-md-flex justify-content-between align-items-center">
-                            <div class="copyright-text">
-                                <p>
-                                    Copyright &copy; InRexRecord-
-                                    <script>document.write(new Date().getFullYear());</script> All rights reserved
-                                </p>
-                            </div>
-                            <div class="copyright-text text-right">
-                                <p>
-                                    Developed by Code Vince
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ***** Footer Area End ***** -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="~/landing/js/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="~/landing/js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="~/landing/js/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="~/landing/js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="~/landing/js/active.js"></script>
-</body>
-
-</html>
+    </div>
+</section>
+    
+    

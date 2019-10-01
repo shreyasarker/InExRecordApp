@@ -1,74 +1,62 @@
-﻿<!DOCTYPE html>
+﻿@{
+    string controller = ViewContext.RouteData.Values["controller"].ToString();
+}
+<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - InExRecordApp</title>
+    <title>@ViewBag.Title - InExRecordApp</title>
+    <link rel="icon" type="image/png" href="~/login/images/icons/favicon.ico" />
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    @if (controller == "Login")
+    {
+        <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="~/lib/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+        <link rel="stylesheet" type="text/css" href="~/login/css/util.css">
+        <link rel="stylesheet" type="text/css" href="~/login/css/main.css">
+    }
+    else
+    {
+        <link href="~/landing/style.css" rel="stylesheet">
+        <link href="~/landing/css/responsive.css" rel="stylesheet">
+    }
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">InExRecordApp</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
+
+    @if (controller != "Login")
+    {
+        <div id="preloader">
+            <div class="mosh-preloader"></div>
         </div>
-    </nav>
+        <partial name="_NavBar" />
+    }
 
-    <partial name="_CookieConsentPartial" />
+    @RenderBody()
+    
+    @if (controller != "Login")
+    {
+        <partial name="_Footer" />
+    }
+    
+    @if (controller == "Login")
+    {
+    <script src="~/lib/jquery/jquery-3.2.1.min.js"></script>
+    }
+    else
+    {
+        <script src="~/landing/js/jquery-2.2.4.min.js"></script>
+        <script src="~/landing/js/popper.min.js"></script>
+        <script src="~/landing/js/bootstrap.min.js"></script>
+        <script src="~/landing/js/plugins.js"></script>
+        <script src="~/landing/js/active.js"></script>
+    }
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - InExRecordApp</p>
-        </footer>
-    </div>
-
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
-    @RenderSection("Scripts", required: false)
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>
