@@ -1,0 +1,132 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>Daily Income</title>
+
+    <!-- Core Stylesheet -->
+    <link href="Assets/landing/style.css" rel="stylesheet">
+
+    <!-- Responsive CSS -->
+    <link href="Assets/landing/css/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+<body>
+
+    <!-- ***** Header Area Start ***** -->
+    
+    <!-- ***** Header Area End ***** -->
+
+    <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
+        <h2>Daily Income</h2>
+        <form>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" class="form-control" id="amount" placeholder="Enter amount" name="amount">
+            </div>
+            <div class="form-group">
+                <div class="radio cash">
+                    <label><input type="radio" name="type" checked>Cash</label>
+                </div>
+                <div class="radio cheque">
+                    <label><input type="radio" name="type">Cheque</label>
+                </div>
+            </div>
+            <div class="form-group cheque-props">
+                <label for="checkNo">Check No:</label>
+                <input type="text" class="form-control" id="checkNo" placeholder="Enter checkNo" name="checkNo">
+            </div>
+            <div class="form-group">
+                <label for="bankName">Bank Name:</label>
+                <input type="text" class="form-control" id="bankName" placeholder="Enter bankName" name="bankName">
+            </div>
+            <div class="form-group">
+                <label for="particular">Particular:</label>
+                <textarea name="particular" id="particular" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="particular">Date:</label>
+                <input type="text" id="datepicker" class="form-control" name="date">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+
+    <!-- ***** Footer Area Start ***** -->
+    <footer class="footer-area clearfix">
+
+        <!-- Fotter Bottom Area -->
+        <div class="footer-bottom-area">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="footer-bottom-content h-100 d-md-flex justify-content-between align-items-center">
+                            <div class="copyright-text">
+                                <p>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;
+                                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+                            </div>
+                            <div class="footer-social-info">
+                                <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ***** Footer Area End ***** -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="Assets/landing/js/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="Assets/landing/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="Assets/landing/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- All Plugins js -->
+    <script src="Assets/landing/js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="Assets/landing/js/active.js"></script>
+    <script>
+    $( function() {
+        $( "#datepicker" ).datepicker();
+    } );
+    </script>
+    <script>
+    $(document).ready(function(){
+        $(".cheque-props").hide();
+        $(".cash").click(function(){
+            $(".cheque-props").hide();
+        });
+        $(".cheque").click(function(){
+            $("cheque-props").show();
+        });
+    });
+    </script>
+</body>
+
+</html>
+
+
