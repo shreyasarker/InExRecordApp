@@ -403,11 +403,11 @@ img {
 .menu_area #nav .nav-link:hover,
 .menu_area #nav .nav-item.active .nav-link,
 .menu_area .dropdown-item:hover {
-    color: #4a7aec;
+    color: #15635f;
 }
 
 .login-register-btn a {
-    color: #4a7aec;
+    color: lightseagreen;
     display: inline-block;
     font-weight: 500;
 }
