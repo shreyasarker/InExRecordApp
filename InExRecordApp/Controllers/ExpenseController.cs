@@ -33,7 +33,13 @@ namespace InExRecordApp.Controllers
                     expense.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
                     dataContext.Expenses.Add(expense);
                     dataContext.SaveChanges();
-                    return Json(new { success = true, redirecturl = Url.Action("Show", "Expense"), message = "Data Submited" });
+
+                    return Json(new
+                    {
+                        success = true,
+                        redirecturl = Url.Action("Show", "Expense"),
+                        message = "Data Submited!"
+                    });
                 }
                 catch (Exception e)
                 {

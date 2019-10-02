@@ -6,7 +6,7 @@
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
-    <form method="post" asp-action="Store" asp-controller="Expense" onsubmit="return save(this);">
+    <form method="post" asp-antiforgery="true">
         <div class="form-group">
             <label asp-for="Amount">Amount:</label>
             <input asp-for="Amount" type="text" class="form-control" placeholder="Enter amount">
@@ -39,29 +39,34 @@
             <input type="text" asp-for="Date" class="form-control datepicker">
             <span asp-validation-for="Date" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" id="submit">Submit</button>
     </form>
 </div>
 
 @section Scripts{
     <script>
-        $(function() {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd'
+        $(function () {
+            $('#submit').click(function(e) {
+                e.preventDefault();
+                $.validator.unobtrusive.parse($('form'));
+                if ($('form').valid()) {
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Action("Store", "Expense")',
+                        headers: {
+                            "CSRF-TOKEN-MOONGLADE-FORM": $('input[name="CSRF-TOKEN-MOONGLADE-FORM"]').val()
+                        },
+                        data: $('form').serialize()
+
+                    }).done(function (response) {
+                        window.location.href = response.redirecturl;
+
+                    }).fail(function (error) {
+
+                    });
+
+                }
             });
-            function save(form) {
-                var ajaxConfig = {
-                    type: 'post',
-                    url: form.action,
-                    data: form.serialize(),
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.href = response.redirecturl;
-                        }
-                    }
-                };
-                $.ajax(ajaxConfig);
-            }
         });
     </script>
 }

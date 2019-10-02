@@ -6,7 +6,7 @@
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
-    <form asp-antiforgery="true">
+    <form method="post" asp-antiforgery="true">
         <div class="form-group">
             <label asp-for="Amount">Amount:</label>
             <input asp-for="Amount" type="text" class="form-control" placeholder="Enter amount">
@@ -45,23 +45,27 @@
 
 @section Scripts{ 
     <script>
-        $(function() {
+        $(function () {
             $('#submit').click(function(e) {
                 e.preventDefault();
-                $.ajax({
-                    type: 'post',
-                    url: '@Url.Action("Store", "Income")',
-                    headers: {
-                        "CSRF-TOKEN-MOONGLADE-FORM": $('input[name="CSRF-TOKEN-MOONGLADE-FORM"]').val()
-                    },
-                    data: $('form').serialize()
+                $.validator.unobtrusive.parse($('form'));
+                if ($('form').valid()) {
+                    $.ajax({
+                        type: 'post',
+                        url: '@Url.Action("Store", "Income")',
+                        headers: {
+                            "CSRF-TOKEN-MOONGLADE-FORM": $('input[name="CSRF-TOKEN-MOONGLADE-FORM"]').val()
+                        },
+                        data: $('form').serialize()
 
-                }).done(function (response) {
-                    window.location.href = response.redirecturl;
+                    }).done(function (response) {
+                        window.location.href = response.redirecturl;
 
-                }).fail(function(error) {
-                    
-                });
+                    }).fail(function (error) {
+
+                    });
+
+                }
             });
         });
     </script>
