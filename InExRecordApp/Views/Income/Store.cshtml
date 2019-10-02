@@ -1,0 +1,74 @@
+﻿@model Income
+
+@{
+    ViewBag.Title = "Store Income";
+}
+
+<div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
+    <h2>Store Income</h2>
+    <form method="post" asp-action="Store" asp-controller="Income" onsubmit="return save(this);">
+        <div class="form-group">
+            <label asp-for="Amount">Amount:</label>
+            <input asp-for="Amount" type="text" class="form-control" placeholder="Enter amount">
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label>Income Type:</label>
+            <div class="radio cash">
+                <label><input asp-for="IncomeType" type="radio" value="Cash" checked>Cash</label>
+            </div>
+            <div class="radio cheque">
+                <label><input asp-for="IncomeType" type="radio" value="Cheque">Cheque</label>
+            </div>
+            <span asp-validation-for="IncomeType" class="text-danger"></span>
+        </div>
+        <div class="form-group cheque-props">
+            <label asp-for="ChequeNo">Check No:</label>
+            <input asp-for="ChequeNo" type="text" class="form-control" placeholder="Enter cheque no">
+        </div>
+        <div class="form-group">
+            <label asp-for="BankName">Bank Name:</label>
+            <input asp-for="BankName" type="text" class="form-control" placeholder="Enter bank name">
+        </div>
+        <div class="form-group">
+            <label asp-for="Particular">Particular:</label>
+            <textarea asp-for="Particular" class="form-control" placeholder="Write.."></textarea>
+        </div>
+        <div class="form-group">
+            <label asp-for="Date">Date:</label>
+            <input type="date" asp-for="Date" class="form-control">
+            <span asp-validation-for="Date" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+@section Scripts{ 
+<script>
+    function save(form) {
+            var ajaxConfig = {
+                type: 'post',
+                url: form.action,
+                data: form.serialize(),
+                success: function (response) {
+                    if (response.success) {
+                        location.reload(@Url.Action("Store"));
+                    }
+                }
+            };
+            $.ajax(ajaxConfig); 
+        //$.validator.unobtrusive.parse();
+        //if ($(form).valid()) {
+
+        //   var ajaxConfig = {
+        //      type: 'post',
+        //      url: form.action,
+        //      data: form.serialize(),
+        //      success: function (response) {
+
+        //      }
+        //    };
+        //    $.ajax(ajaxConfig);    
+        }
+</script>
+}

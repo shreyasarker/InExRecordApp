@@ -10,7 +10,6 @@ namespace InExRecordApp.Models
 {
     public class User
     {
-        [Key]
         public int Id { get; set; }
 
         [Column(TypeName = "nvarchar(250)")]

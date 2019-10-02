@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InExRecordApp.Migrations
 {
-    public partial class MigrationAdded : Migration
+    public partial class CreateDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,7 +38,8 @@ namespace InExRecordApp.Migrations
                     ChequeNo = table.Column<string>(type: "varchar(100)", nullable: true),
                     BankName = table.Column<string>(type: "varchar(250)", nullable: true),
                     Particular = table.Column<string>(type: "text", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,10 +83,10 @@ namespace InExRecordApp.Migrations
                 columns: new[] { "Id", "Address", "ContactNo", "Designation", "Email", "Name", "Password" },
                 values: new object[,]
                 {
-                    { 1, "Banani", "01713747775", "Sr. Accountant", "siddharthya@gmail.com", "Siddharthya Chowdhury", "$2b$10$stZqecoXIUO0FTSyhP.wMOBK6szk5fN/paIAzanrnsm4AUXnZbje." },
-                    { 2, "Dhanmondi", "01916747456", "Jr. Accountant", "sohini@gmail.com", "Sohini Azam", "$2b$10$IncOBmoFRhXvNwQS3Sqd/.33OTojhQUKpdr/L.BeOThEg3YmisUwq" },
-                    { 3, "Mohakhali DOHS", "01816749274", "Jr. Accountant", "sen@gmail.com", "A K Sen", "$2b$10$ifLcCXGtA2OSnziBnDWpz.58tghV0AqfAb/KVmWnjEgqIfCQgirGm" },
-                    { 4, "Gulshan", "01772939284", "Sr. Accountant", "thomas@gmail.com", "Thomas Barua", "$2b$10$9py2KNTn7NnJH5H2dSzDEODUKZ7PqV98HRlTUPv5ZC28Lj/iRig.6" }
+                    { 1, "Banani", "01713747775", "Sr. Accountant", "siddharthya@gmail.com", "Siddharthya Chowdhury", "$2b$10$cbLRvY6bf2jcAuW8j.iHYOzZEW7RN8p81qgx0TlK/M/VwQ2PPQYGu" },
+                    { 2, "Dhanmondi", "01916747456", "Jr. Accountant", "sohini@gmail.com", "Sohini Azam", "$2b$10$CLnFdLrsXUPNTmMlqg5MRuOHT4JcAoGxybPZgJiTGdTSUT6dFbXSS" },
+                    { 3, "Mohakhali DOHS", "01816749274", "Jr. Accountant", "sen@gmail.com", "A K Sen", "$2b$10$fyIdPGF1/jkmw3sKXniMwePiM4YDEXpM7.2.5bWJ0QZxOBaq0fSXC" },
+                    { 4, "Gulshan", "01772939284", "Sr. Accountant", "thomas@gmail.com", "Thomas Barua", "$2b$10$vZDMmPeH5AyCjnFuW1BWQewmKeSf5b0wunm4WTwWqdOf6vG8tfRvS" }
                 });
 
             migrationBuilder.CreateIndex(

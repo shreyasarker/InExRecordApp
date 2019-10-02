@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InExRecordApp.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190930124215_MigrationAdded")]
-    partial class MigrationAdded
+    [Migration("20191002063730_CreateDatabase")]
+    partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,9 @@ namespace InExRecordApp.Migrations
                     b.Property<string>("ExpenseType")
                         .IsRequired()
                         .HasColumnType("varchar(20)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Particular")
                         .HasColumnType("text");
@@ -130,10 +133,10 @@ namespace InExRecordApp.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { Id = 1, Address = "Banani", ContactNo = "01713747775", Designation = "Sr. Accountant", Email = "siddharthya@gmail.com", Name = "Siddharthya Chowdhury", Password = "$2b$10$stZqecoXIUO0FTSyhP.wMOBK6szk5fN/paIAzanrnsm4AUXnZbje." },
-                        new { Id = 2, Address = "Dhanmondi", ContactNo = "01916747456", Designation = "Jr. Accountant", Email = "sohini@gmail.com", Name = "Sohini Azam", Password = "$2b$10$IncOBmoFRhXvNwQS3Sqd/.33OTojhQUKpdr/L.BeOThEg3YmisUwq" },
-                        new { Id = 3, Address = "Mohakhali DOHS", ContactNo = "01816749274", Designation = "Jr. Accountant", Email = "sen@gmail.com", Name = "A K Sen", Password = "$2b$10$ifLcCXGtA2OSnziBnDWpz.58tghV0AqfAb/KVmWnjEgqIfCQgirGm" },
-                        new { Id = 4, Address = "Gulshan", ContactNo = "01772939284", Designation = "Sr. Accountant", Email = "thomas@gmail.com", Name = "Thomas Barua", Password = "$2b$10$9py2KNTn7NnJH5H2dSzDEODUKZ7PqV98HRlTUPv5ZC28Lj/iRig.6" }
+                        new { Id = 1, Address = "Banani", ContactNo = "01713747775", Designation = "Sr. Accountant", Email = "siddharthya@gmail.com", Name = "Siddharthya Chowdhury", Password = "$2b$10$cbLRvY6bf2jcAuW8j.iHYOzZEW7RN8p81qgx0TlK/M/VwQ2PPQYGu" },
+                        new { Id = 2, Address = "Dhanmondi", ContactNo = "01916747456", Designation = "Jr. Accountant", Email = "sohini@gmail.com", Name = "Sohini Azam", Password = "$2b$10$CLnFdLrsXUPNTmMlqg5MRuOHT4JcAoGxybPZgJiTGdTSUT6dFbXSS" },
+                        new { Id = 3, Address = "Mohakhali DOHS", ContactNo = "01816749274", Designation = "Jr. Accountant", Email = "sen@gmail.com", Name = "A K Sen", Password = "$2b$10$fyIdPGF1/jkmw3sKXniMwePiM4YDEXpM7.2.5bWJ0QZxOBaq0fSXC" },
+                        new { Id = 4, Address = "Gulshan", ContactNo = "01772939284", Designation = "Sr. Accountant", Email = "thomas@gmail.com", Name = "Thomas Barua", Password = "$2b$10$vZDMmPeH5AyCjnFuW1BWQewmKeSf5b0wunm4WTwWqdOf6vG8tfRvS" }
                     );
                 });
 
