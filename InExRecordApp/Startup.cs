@@ -45,6 +45,11 @@ namespace InExRecordApp
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            services.AddAntiforgery(options =>
+            {
+                options.Cookie.Name = "X-CSRF-TOKEN-MOONGLADE";
+                options.FormFieldName = "CSRF-TOKEN-MOONGLADE-FORM";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

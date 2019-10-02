@@ -6,7 +6,7 @@
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
-    <form method="post" asp-action="Store" asp-controller="Income" onsubmit="return save(this);">
+    <form asp-antiforgery="true">
         <div class="form-group">
             <label asp-for="Amount">Amount:</label>
             <input asp-for="Amount" type="text" class="form-control" placeholder="Enter amount">
@@ -39,29 +39,30 @@
             <input type="text" asp-for="Date" class="form-control datepicker">
             <span asp-validation-for="Date" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit" class="btn btn-default" id="submit">Submit</button>
     </form>
 </div>
 
 @section Scripts{ 
     <script>
         $(function() {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd'
-            });
-            function save(form) {
-                var ajaxConfig = {
+            $('#submit').click(function(e) {
+                e.preventDefault();
+                $.ajax({
                     type: 'post',
-                    url: form.action,
-                    data: form.serialize(),
-                    success: function (response) {
-                        if (response.success) {
-                            window.location.href = response.redirecturl;
-                        }
-                    }
-                };
-                $.ajax(ajaxConfig); 
-            }
+                    url: '@Url.Action("Store", "Income")',
+                    headers: {
+                        "CSRF-TOKEN-MOONGLADE-FORM": $('input[name="CSRF-TOKEN-MOONGLADE-FORM"]').val()
+                    },
+                    data: $('form').serialize()
+
+                }).done(function (response) {
+                    window.location.href = response.redirecturl;
+
+                }).fail(function(error) {
+                    
+                });
+            });
         });
     </script>
 }

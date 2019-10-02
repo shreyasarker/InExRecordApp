@@ -24,6 +24,7 @@ namespace InExRecordApp.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Store(Income income)
         {
             if (ModelState.IsValid)
@@ -33,6 +34,7 @@ namespace InExRecordApp.Controllers
                     income.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
                     dataContext.Incomes.Add(income);
                     dataContext.SaveChanges();
+                   
                     return Json(new {success = true, redirecturl = Url.Action("Show", "Income"), message = "Data Submited"});
                 }
                 catch (Exception e)
