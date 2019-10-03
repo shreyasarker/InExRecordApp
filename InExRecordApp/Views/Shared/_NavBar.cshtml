@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http
+
 <header class="header_area clearfix" style="background: lightseagreen;">
     <div class="container-fluid h-100">
         <div class="row h-100">
@@ -11,47 +12,45 @@
                         </a>
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mosh-navbar" aria-controls="mosh-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                        @if (!string.IsNullOrEmpty(Context.Session.GetInt32("userId").ToString()))
-                        {
-                        <ul class="navbar-nav animated" id="nav">
-                            <li class="nav-item active"><a asp-action="UserProfile" asp-controller="Dashboard" class="nav-link" style="color: white;">Profile</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Income</a>
-                                <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                                    <a asp-action="Store" asp-controller="Income" class="dropdown-item">Store</a>
-                                    <a asp-action="Show" asp-controller="Income" class="dropdown-item">View</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Expense</a>
-                                <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                                    <a asp-action="Store" asp-controller="Expense" class="dropdown-item">Store</a>
-                                    <a asp-action="Show" asp-controller="Expense" class="dropdown-item">View</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report</a>
-                                <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                                    <a class="dropdown-item" href="index.html">Monthly Income</a>
-                                    <a class="dropdown-item" href="about.html">Monthly Expense</a>
-                                    <a class="dropdown-item" href="about.html">Yearly Profit</a>
-                                </div>
-                            </li>
-                        </ul>
-                            <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
+                        <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
+                            @if (!string.IsNullOrEmpty(Context.Session.GetInt32("userId").ToString()))
+                            {
+                                <ul class="navbar-nav animated" id="nav">
+                                    <li class="nav-item active"><a asp-action="UserProfile" asp-controller="Dashboard" class="nav-link" style="color: white;">Profile</a></li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Income</a>
+                                        <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                            <a asp-action="Store" asp-controller="Income" class="dropdown-item">Store</a>
+                                            <a asp-action="Show" asp-controller="Income" class="dropdown-item">View</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Expense</a>
+                                        <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                            <a asp-action="Store" asp-controller="Expense" class="dropdown-item">Store</a>
+                                            <a asp-action="Show" asp-controller="Expense" class="dropdown-item">View</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report</a>
+                                        <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                            <a class="dropdown-item" href="index.html">Monthly Income</a>
+                                            <a class="dropdown-item" href="about.html">Monthly Expense</a>
+                                            <a class="dropdown-item" href="about.html">Yearly Profit</a>
+                                        </div>
+                                    </li>
+                                </ul>
                                 <div class="login-register-btn">
                                     <a asp-action="Index" asp-controller="Login" style="color: white; font-size: 18px;">Logout</a>
                                 </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
+                            }
+                            else
+                            {
                                 <div class="login-register-btn">
                                     <a asp-action="Index" asp-controller="Login" style="color: white;font-size: 18px;">Login</a>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                      </nav>
                 </div>
             </div>
