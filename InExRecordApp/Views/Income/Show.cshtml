@@ -1,36 +1,77 @@
-﻿
+﻿@model List<Income>
+
 @{
     ViewBag.Title = "View Income";
+    int i = 0;
 }
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead>
-            <tr>
-                <th>Header 1</th>
-                <th>Header 2</th>
-                <th>Header 3</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-            </tr>
-            <tr>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-            </tr>
-            <tr>
-                <td>Cell</td>
-                <td>Cell</td>
-                <td>Cell</td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="panel panel-default">
+        <div class="panel-title">
+            <h4>View and approve pending Income(s)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Cash/Cheque</th>
+                            <th>Bank Name</th>
+                            <th>Particular</th>
+                            <th>Approve</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Income income in Model)
+                        {
+                            <tr>
+                                <td>@{ i++; }</td>
+                                <td>@income.Date.ToString("yyyy MMMM dd")</td>
+                                <td>@income.Amount</td>
+                                <td>@income.IncomeType</td>
+                                <td>@income.BankName</td>
+                                <td>@income.Particular</td>
+                                <td class="checkbox text-right"><label><input name="isApproved[]" value="@income.Id" type="checkbox" /></label></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-primary" id="save" type="submit">Save</button>
+        </div>
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(function() {
+            $('#save').click(function(e) {
+                e.preventDefault();
+
+                var ids = [];
+
+                $(':checkbox:checked').each(function() {
+                    ids.push($(this).val());
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Approve", "Income")',
+                    data: {ids: ids}
+                }).done(function(response) {
+                    if (response.success) {
+                        window.location.href = response.redirecturl;
+                    }
+                }).fail(function(error) {
+                    
+                });
+            });
+        });
+    </script>
+}
