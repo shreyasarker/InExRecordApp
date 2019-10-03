@@ -53,7 +53,23 @@ namespace InExRecordApp.Controllers
         [HttpGet]
         public IActionResult Show()
         {
-            return View();
+            List<Expense> expenses = dataContext.Expenses.Where(i => i.IsApproved == false).ToList();
+            return View(expenses);
+        }
+
+        [HttpPost]
+        public IActionResult Approve(int[] ids)
+        {
+
+            var entity = dataContext.Expenses.Where(i => ids.Contains(i.Id));
+
+            foreach (var e in entity)
+            {
+                e.IsApproved = true;
+                dataContext.Expenses.Update(e);
+            }
+            dataContext.SaveChanges();
+            return Json(new { success = true, redirecturl = Url.Action("Show", "Expense"), message = "Data approved!" });
         }
     }
 }

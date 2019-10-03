@@ -1,8 +1,77 @@
-﻿
+﻿@model List<Expense>
+
 @{
-    ViewBag.Title = "View Expenese";
+    ViewBag.Title = "View Expense";
+    int i = 0;
 }
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
+    <div class="panel panel-default">
+        <div class="panel-title">
+            <h4>View and approve pending Expense(s)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Cash/Cheque</th>
+                            <th>Bank Name</th>
+                            <th>Particular</th>
+                            <th>Approve</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Expense expense in Model)
+                        {
+                            <tr>
+                                <td>@{ i++; }</td>
+                                <td>@expense.Date.ToString("yyyy MMMM dd")</td>
+                                <td>@expense.Amount</td>
+                                <td>@expense.ExpenseType</td>
+                                <td>@expense.BankName</td>
+                                <td>@expense.Particular</td>
+                                <td class="checkbox text-right"><label><input name="isApproved[]" value="@expense.Id" type="checkbox" /></label></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-primary" id="save" type="submit">Save</button>
+        </div>
+    </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(function() {
+            $('#save').click(function(e) {
+                e.preventDefault();
+
+                var ids = [];
+
+                $(':checkbox:checked').each(function() {
+                    ids.push($(this).val());
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Approve", "Expense")',
+                    data: {ids: ids}
+                }).done(function(response) {
+                    if (response.success) {
+                        window.location.href = response.redirecturl;
+                    }
+                }).fail(function(error) {
+
+                });
+            });
+        });
+    </script>
+}
