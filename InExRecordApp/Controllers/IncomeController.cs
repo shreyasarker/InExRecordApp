@@ -68,7 +68,6 @@ namespace InExRecordApp.Controllers
             {
                 e.IsApproved = true;
                 dataContext.Incomes.Update(e);
-                
             }
             dataContext.SaveChanges();
             return Json(new { success = true, redirecturl = Url.Action("Show", "Income"), message = "Data approved!" });
