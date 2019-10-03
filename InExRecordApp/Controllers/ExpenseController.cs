@@ -60,16 +60,24 @@ namespace InExRecordApp.Controllers
         [HttpPost]
         public IActionResult Approve(int[] ids)
         {
-
-            var entity = dataContext.Expenses.Where(i => ids.Contains(i.Id));
-
-            foreach (var e in entity)
+            try
             {
-                e.IsApproved = true;
-                dataContext.Expenses.Update(e);
+                var entity = dataContext.Expenses.Where(i => ids.Contains(i.Id));
+
+                foreach (var e in entity)
+                {
+                    e.IsApproved = true;
+                    dataContext.Expenses.Update(e);
+                }
+                dataContext.SaveChanges();
+
+                return Json(new { success = true, redirecturl = Url.Action("Show", "Expense"), message = "Data approved!" });
             }
-            dataContext.SaveChanges();
-            return Json(new { success = true, redirecturl = Url.Action("Show", "Expense"), message = "Data approved!" });
+            catch (Exception e)
+            {
+                return Json(new { success = false, message = e.Message });
+            }
+           
         }
     }
 }
