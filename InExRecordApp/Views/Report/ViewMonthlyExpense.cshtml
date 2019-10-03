@@ -1,15 +1,47 @@
-﻿
+﻿@model List<Expense>
+
 @{
-    Layout = null;
+    ViewBag.Title = "Monthly Report";
+    int i = 0;
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ViewMonthlyExpense</title>
-</head>
-<body>
-</body>
-</html>
+<div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
+    <h2>@ViewBag.Title</h2>
+    <div class="panel panel-default">
+        <div class="panel-title">
+            <h4>View monthly expense(s)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Cash/Cheque</th>
+                            <th>Bank Name</th>
+                            <th>Particular</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Expense expense in Model)
+                        {
+                            <tr>
+                                <td>@{ i++; }</td>
+                                <td>@expense.Date.ToString("yyyy MMMM dd")</td>
+                                <td>@expense.Amount</td>
+                                <td>@expense.ExpenseType</td>
+                                <td>@expense.BankName</td>
+                                <td>@expense.Particular</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <a class="btn btn-primary" href="#">PDF</a>
+        </div>
+    </div>
+</div>

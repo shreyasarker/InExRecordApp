@@ -34,8 +34,8 @@
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report</a>
                                         <div class="dropdown-menu" aria-labelledby="moshDropdown">
-                                            <a class="dropdown-item" href="index.html">Monthly Income</a>
-                                            <a class="dropdown-item" href="about.html">Monthly Expense</a>
+                                            <a asp-action="ViewMonthlyIncome" asp-controller="Report" class="dropdown-item">Monthly Income</a>
+                                            <a asp-action="ViewMonthlyExpense" asp-controller="Report" class="dropdown-item">Monthly Expense</a>
                                             <a class="dropdown-item" href="about.html">Yearly Profit</a>
                                         </div>
                                     </li>
