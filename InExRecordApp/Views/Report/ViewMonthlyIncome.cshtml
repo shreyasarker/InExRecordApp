@@ -1,0 +1,47 @@
+﻿@model List<Income>
+
+@{
+    ViewBag.Title = "Monthly Report";
+    int i = 0;
+}
+
+<div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
+    <h2>@ViewBag.Title</h2>
+    <div class="panel panel-default">
+        <div class="panel-title">
+            <h4>View monthly incomes(s)</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Cash/Cheque</th>
+                        <th>Bank Name</th>
+                        <th>Particular</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (Income income in Model)
+                    {
+                        <tr>
+                            <td>@{ i++; }</td>
+                            <td>@income.Date.ToString("yyyy MMMM dd")</td>
+                            <td>@income.Amount</td>
+                            <td>@income.IncomeType</td>
+                            <td>@income.BankName</td>
+                            <td>@income.Particular</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-primary" id="save" type="submit">Save</button>
+        </div>
+    </div>
+</div>

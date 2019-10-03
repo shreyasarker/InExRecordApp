@@ -53,7 +53,7 @@ namespace InExRecordApp.Controllers
         [HttpGet]
         public IActionResult Show()
         {
-            List<Expense> expenses = dataContext.Expenses.Where(i => i.IsApproved == false).ToList();
+            List<Expense> expenses = dataContext.Expenses.Where(e => e.IsApproved == false).ToList();
             return View(expenses);
         }
 
