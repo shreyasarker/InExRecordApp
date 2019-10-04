@@ -14,6 +14,7 @@ namespace InExRecordApp.Controllers
             ViewBag.UserId = HttpContext.Session.GetInt32("userId");
             return View();
         }
+
         public IActionResult UserProfile()
         {
             ViewBag.UserId = HttpContext.Session.GetInt32("userId");
