@@ -1,0 +1,76 @@
+﻿@model List<Income>
+
+@{
+    ViewBag.Title = "Yearly Report";
+    int i = 0;
+}
+
+
+
+<div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
+    <h2>@ViewBag.Title</h2>
+    <div class="panel panel-default">
+        <div class="panel-title">
+            <h4>Yearly Income Expense Report</h4>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Income</th>
+                            <th>Expense</th>
+                            <th>Profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Income income in Model)
+                        {
+                            <tr>
+                                <td>@{ i = i + 1; }</td>
+                                <td>@income.Date.ToString("yyyy MMMM dd")</td>
+                                <td>@income.Amount</td>
+                                <td>@income.IncomeType</td>
+                                <td>@income.BankName</td>
+                                <td>@income.Particular</td>
+                                <td class="checkbox text-center"><label><input name="isApproved[]" value="@income.Id" type="checkbox" /></label></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel-footer text-right">
+            <button class="btn btn-primary" id="save" type="submit">Save</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(function() {
+            $('#save').click(function(e) {
+                e.preventDefault();
+
+                var ids = [];
+
+                $(':checkbox:checked').each(function() {
+                    ids.push($(this).val());
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Approve", "Income")',
+                    data: {ids: ids}
+                }).done(function(response) {
+                    if (response.success) {
+                        window.location.href = response.redirecturl;
+                    }
+                }).fail(function(error) {
+
+                });
+            });
+        });
+    </script>
+}
