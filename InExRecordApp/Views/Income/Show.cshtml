@@ -5,6 +5,8 @@
     int i = 0;
 }
 
+
+
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
     <div class="panel panel-default">
@@ -13,7 +15,7 @@
         </div>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="dataTable">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -29,13 +31,13 @@
                         @foreach (Income income in Model)
                         {
                             <tr>
-                                <td>@{ i++; }</td>
+                                <td>@{ i = i + 1; }</td>
                                 <td>@income.Date.ToString("yyyy MMMM dd")</td>
                                 <td>@income.Amount</td>
                                 <td>@income.IncomeType</td>
                                 <td>@income.BankName</td>
                                 <td>@income.Particular</td>
-                                <td class="checkbox text-right"><label><input name="isApproved[]" value="@income.Id" type="checkbox" /></label></td>
+                                <td class="checkbox text-center"><label><input name="isApproved[]" value="@income.Id" type="checkbox" /></label></td>
                             </tr>
                         }
                     </tbody>

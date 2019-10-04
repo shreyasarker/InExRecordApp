@@ -4,6 +4,15 @@
     ViewBag.Title = "Store Income";
 }
 
+<style>
+    .cheque:focus ~ .chequeprops {
+        display: none;
+    }
+
+    .cash:focus ~ .alert {
+        display: block;
+    }
+</style>
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
     <form method="post" asp-antiforgery="true">
@@ -22,7 +31,7 @@
             </div>
             <span asp-validation-for="IncomeType" class="text-danger"></span>
         </div>
-        <div class="form-group cheque-props">
+        <div class="form-group chequeprops">
             <label asp-for="ChequeNo">Check No:</label>
             <input asp-for="ChequeNo" type="text" class="form-control" placeholder="Enter cheque no">
         </div>
@@ -43,7 +52,10 @@
     </form>
 </div>
 
-@section Scripts{ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+@section Scripts{
+
     <script>
         $(function () {
             $('#submit').click(function(e) {
@@ -59,7 +71,10 @@
                         data: $('form').serialize()
 
                     }).done(function (response) {
-                        window.location.href = response.redirecturl;
+
+                        swal("Income is Stored", "", "success").then(function() {
+                            window.location.href = response.redirecturl;
+                        });
 
                     }).fail(function (error) {
 

@@ -43,6 +43,7 @@
     </form>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 @section Scripts{
     <script>
         $(function () {
@@ -59,7 +60,11 @@
                         data: $('form').serialize()
 
                     }).done(function (response) {
-                        window.location.href = response.redirecturl;
+
+                        swal("Expense is Stored", "", "success").then(function () {
+                            window.location.href = response.redirecturl;
+                        });
+                        
 
                     }).fail(function (error) {
 
