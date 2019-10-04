@@ -37,7 +37,7 @@ namespace InExRecordApp.Controllers
                 return View(aUser);
             }
             HttpContext.Session.SetInt32("userId", user.Id);
-            return RedirectToAction("UserProfile", "Dashboard");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         private User CheckLogin(string email, string password)
