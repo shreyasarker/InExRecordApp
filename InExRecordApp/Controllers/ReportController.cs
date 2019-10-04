@@ -28,29 +28,60 @@ namespace InExRecordApp.Controllers
             return View(expenses);
         }
 
-        public JsonResult ViewYearlyProfit()
+        public IActionResult ViewYearlyProfit()
         {
-            List<Income> incomes = new List<Income>();
+            //var incomes = dataContext.Incomes.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
+            //{
+            //    month = key.Month,
+            //    income = group.Sum(k => k.Amount)
+            //}).ToList();
 
-            //var data = incomes.Select(k => new {k.Date.Month, k.Amount})
-            //    .GroupBy(x => new { x.Month}, (key, group) => new
-            //    {
-            //        monthName = key.Month,
-            //        totalAmount = group.Sum(k => k.Amount)
-            //    }).ToList();
+            //var expenses = dataContext.Expenses.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
+            //{
+            //    month = key.Month,
+            //    income = group.Sum(k => k.Amount)
+            //}).ToList();
 
-            IEnumerable<IncomeResult> data = from c in incomes
-                group c by new
+            ////var data = from i in dataContext.Incomes
+            ////    join e in dataContext.Expenses
+            ////        on i.Date equals e.Date
+            ////        group i by 
+            //var monthsToDate = Enumerable.Range(1, 12)
+            //    .Select(m => new DateTime(DateTime.Today.Year, m, 1))
+            //    .ToList();
+
+
+            var q1 = dataContext.Incomes
+                .GroupBy(r => r.Date.Month)
+                .Select(a => new
                 {
-                    c.UserId,
-                } into grp
-                select new IncomeResult()
-                {
-                    Month = new DateTime(grp.Key.UserId),
-                    Sum = grp.Sum(s => s.Amount)
-                };
+                    Month = a.Key,
+                    Amount = a.Sum(r => r.Amount)
+                }).ToList();
 
-            return new JsonResult(data);
+
+            var q2 = dataContext.Expenses
+                .GroupBy(r => r.Date.Month)
+                .Select(a => new
+                {
+                    Month = a.Key,
+                    Amount = a.Sum(r => r.Amount)
+                }).ToList();
+            List<YearlyData> yearlyDatas = new List<YearlyData>();
+            //foreach (var a in q1)
+            //{
+            //    yearl
+            //}
+            var data = (from i in q1
+                join e in q2 on i.Month equals e.Month
+                group new {i, e} by e.Month into v
+                    select new
+                    {
+                        Month = v.Key,
+                        incomeAmount = v.Max(x => x.i.Amount),
+                        expenseAmount = v.Max(x => x.e.Amount),
+                    });
+            return Json(new {data = data});
         }
     }
 }

@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace InExRecordApp.Models
 {
-    public class IncomeResult
+    public class YearlyData
     {
-        public double Sum { get; set; }
+        public double Incomes { get; set; }
+        public double Expenses { get; set; }
         public DateTime Month { get; set; }
     }
 }
