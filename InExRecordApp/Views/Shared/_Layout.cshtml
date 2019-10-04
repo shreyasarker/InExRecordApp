@@ -1,5 +1,7 @@
 ﻿@{
     string controller = ViewContext.RouteData.Values["controller"].ToString();
+    string action = ViewContext.RouteData.Values["action"].ToString();
+
 }
 <!DOCTYPE html>
 
@@ -32,9 +34,6 @@
 
     @if (controller != "Login")
     {
-        <div id="preloader">
-            <div class="mosh-preloader"></div>
-        </div>
         <partial name="_NavBar" />
     }
 
@@ -42,6 +41,9 @@
 
     @if (controller != "Login")
     {
+        @*<div id="preloader">
+            <div class="mosh-preloader"></div>
+        </div>*@
         <partial name="_Footer" />
     }
 
@@ -59,6 +61,38 @@
         <script src="~/main/js/active.js"></script>
     }
 
+    @if (controller == "Income" && action == "Show")
+    {
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+        
+        <script>
+            jQuery.noConflict();
+            jQuery(document).ready(function () {
+                jQuery('#dataTable').DataTable();
+            });
+        </script>
+    }
+
+    @if (controller == "Expense" && action == "Show")
+    {
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+        
+        <script>
+            jQuery.noConflict();
+            jQuery(document).ready(function () {
+                jQuery('#dataTable').DataTable();
+            });
+        </script>
+    }
+
+    @if (controller == "Income" && action == "Store")
+    {
+        
+    }
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 

@@ -5,6 +5,7 @@
     int i = 0;
 }
 
+
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
     <div class="panel panel-default">
@@ -13,7 +14,7 @@
         </div>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="dataTable">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -35,7 +36,7 @@
                                 <td>@expense.ExpenseType</td>
                                 <td>@expense.BankName</td>
                                 <td>@expense.Particular</td>
-                                <td class="checkbox text-right"><label><input name="isApproved[]" value="@expense.Id" type="checkbox" /></label></td>
+                                <td class="checkbox text-center"><label><input name="isApproved[]" value="@expense.Id" type="checkbox" /></label></td>
                             </tr>
                         }
                     </tbody>
@@ -47,6 +48,8 @@
         </div>
     </div>
 </div>
+
+
 
 @section Scripts{
     <script>
@@ -73,5 +76,6 @@
                 });
             });
         });
+
     </script>
 }
