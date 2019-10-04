@@ -8,12 +8,16 @@
   <ItemGroup>
     <Compile Remove="Gateway\**" />
     <Compile Remove="Manager\**" />
+    <Compile Remove="Views\Layout\**" />
     <Content Remove="Gateway\**" />
     <Content Remove="Manager\**" />
+    <Content Remove="Views\Layout\**" />
     <EmbeddedResource Remove="Gateway\**" />
     <EmbeddedResource Remove="Manager\**" />
+    <EmbeddedResource Remove="Views\Layout\**" />
     <None Remove="Gateway\**" />
     <None Remove="Manager\**" />
+    <None Remove="Views\Layout\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,10 +26,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Layout\" />
   </ItemGroup>
 
 </Project>

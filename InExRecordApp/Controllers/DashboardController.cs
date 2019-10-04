@@ -9,6 +9,14 @@ namespace InExRecordApp.Controllers
 {
     public class DashboardController : Controller
     {
+        public DashboardController()
+        {
+            var userId = HttpContext.Session.GetInt32("userId");
+            if (userId == null)
+            {
+                //re
+            }
+        }
         public IActionResult UserProfile()
         {
             ViewBag.UserId = HttpContext.Session.GetInt32("userId");
