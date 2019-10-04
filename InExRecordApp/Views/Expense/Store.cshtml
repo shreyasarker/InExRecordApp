@@ -4,6 +4,18 @@
     ViewBag.Title = "Store Expense";
 }
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#hide").click(function () {
+            $(".chequeprops").hide(500);
+        });
+        $("#show").click(function () {
+            $(".chequeprops").show(500);
+        });
+    });
+</script>
+
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
     <form method="post" asp-antiforgery="true">
@@ -14,19 +26,19 @@
         </div>
         <div class="form-group">
             <label>Income Type:</label>
-            <div class="radio cash">
+            <div class="radio" id="hide">
                 <label><input asp-for="ExpenseType" type="radio" value="Cash" checked>Cash</label>
             </div>
-            <div class="radio cheque">
+            <div class="radio" id="show">
                 <label><input asp-for="ExpenseType" type="radio" value="Cheque">Cheque</label>
             </div>
             <span asp-validation-for="ExpenseType" class="text-danger"></span>
         </div>
-        <div class="form-group cheque-props">
+        <div class="form-group chequeprops" style="display: none;">
             <label asp-for="ChequeNo">Check No:</label>
             <input asp-for="ChequeNo" type="text" class="form-control" placeholder="Enter cheque no">
         </div>
-        <div class="form-group">
+        <div class="form-group chequeprops" style="display: none;">
             <label asp-for="BankName">Bank Name:</label>
             <input asp-for="BankName" type="text" class="form-control" placeholder="Enter bank name">
         </div>
@@ -64,7 +76,7 @@
                         swal("Expense is Stored", "", "success").then(function () {
                             window.location.href = response.redirecturl;
                         });
-                        
+
 
                     }).fail(function (error) {
 

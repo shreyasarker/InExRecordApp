@@ -1,17 +1,37 @@
-﻿@using Microsoft.AspNetCore.Http
-
+﻿
 @{
-    Layout = null;
+    ViewBag.Title = "User Dashboard";
 }
 
-<!DOCTYPE html>
+<style>
+    .user-title {
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-<h2>Welcome @ViewBag.UserId </h2>
-</body>
-</html>
+        .user-title h3 {
+            color: green;
+        }
+
+    .dashboard-wrapper {
+        margin-top: 120px;
+        margin-bottom: 3px;
+        width: 100%;
+    }
+
+        .dashboard-wrapper img {
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+</style>
+
+<div class="user-title">
+    <h3>Hello User !</h3>
+</div>
+
+<div class="dashboard-wrapper">
+    <img src="~/main/img/dashboard.jpg" alt="Dashboard" />
+</div>
+

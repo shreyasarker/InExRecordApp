@@ -16,7 +16,7 @@
                             @if (!string.IsNullOrEmpty(Context.Session.GetInt32("userId").ToString()))
                             {
                                 <ul class="navbar-nav animated" id="nav">
-                                    <li class="nav-item active"><a asp-action="UserProfile" asp-controller="Dashboard" class="nav-link" style="color: white;">Profile</a></li>
+                                    <li class="nav-item active"><a asp-action="Index" asp-controller="Dashboard" class="nav-link" style="color: white;">Dashboard</a></li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Income</a>
                                         <div class="dropdown-menu" aria-labelledby="moshDropdown">
