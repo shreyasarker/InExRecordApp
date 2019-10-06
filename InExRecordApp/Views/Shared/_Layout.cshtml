@@ -41,9 +41,7 @@
 
     @if (controller != "Login")
     {
-        @*<div id="preloader">
-            <div class="mosh-preloader"></div>
-        </div>*@
+
         <partial name="_Footer" />
     }
 
@@ -51,9 +49,44 @@
     {
         <script src="~/lib/jquery/jquery-3.2.1.min.js"></script>
     }
+
+    else if (action == "Show")
+    {
+        @*<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>*@
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="~/main/js/popper.min.js"></script>
+        <script src="~/main/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+
+        <script>
+            $('#dataTable').DataTable();
+        </script>
+    }
+    else if (action == "Store")
+    {
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="~/main/js/popper.min.js"></script>
+        <script src="~/main/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <script>
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                "setDate": new Date(),
+                "autoclose": true
+            });
+        </script>
+    }
     else
     {
         <script src="~/main/js/jquery-2.2.4.min.js"></script>
+        @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
         <script src="~/main/js/popper.min.js"></script>
         <script src="~/main/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -61,48 +94,11 @@
         <script src="~/main/js/active.js"></script>
     }
 
-    @if (controller == "Income" && action == "Show")
-    {
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-        
-        <script>
-            jQuery.noConflict();
-            jQuery(document).ready(function () {
-                jQuery('#dataTable').DataTable();
-            });
-        </script>
-    }
 
-    @if (controller == "Expense" && action == "Show")
-    {
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-        
-        <script>
-            jQuery.noConflict();
-            jQuery(document).ready(function () {
-                jQuery('#dataTable').DataTable();
-            });
-        </script>
-    }
-
-    @if (controller == "Income" && action == "Store")
-    {
-        
-    }
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 
-    <script>
-        $('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            "setDate": new Date(),
-            "autoclose": true
-        });
-    </script>
+
 
     @RenderSection("Scripts", required: false)
 </body>

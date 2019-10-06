@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace InExRecordApp.Models
@@ -22,6 +23,7 @@ namespace InExRecordApp.Models
 
         [Column(TypeName = "money")]
         [Required(ErrorMessage = "Amount is required")]
+        [DataType(DataType.Currency, ErrorMessage = "Amount must be numeric")]
         public double Amount { get; set; }
 
         [Column(TypeName = "varchar(100)")]
@@ -31,10 +33,12 @@ namespace InExRecordApp.Models
         public string BankName { get; set; }
 
         [Column(TypeName = "text")]
+        [Required(ErrorMessage = "Particular is required")]
         public string Particular { get; set; }
 
         [Column(TypeName = "datetime")]
         [Required(ErrorMessage = "Date is required")]
+        [DataType(DataType.Date, ErrorMessage = "Date format is invalid")]
         public DateTime Date { get; set; }
 
         [Column(TypeName = "bit")]
