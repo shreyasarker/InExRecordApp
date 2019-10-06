@@ -12,38 +12,38 @@ namespace InExRecordApp.Controllers
 {
     public class ReportController : Controller
     {
-        private DataContext dataContext;
-        public ReportController(DataContext dataContext)
+        private AppDbContext _context;
+        public ReportController(AppDbContext context)
         {
-            this.dataContext = dataContext;
+            _context = context;
         }
         public IActionResult ViewMonthlyIncome()
         {
-            List<Income> incomes = dataContext.Incomes.Where(i => i.IsApproved).ToList();
+            List<Income> incomes = _context.Incomes.Where(i => i.IsApproved).ToList();
             return View(incomes);
         }
         public IActionResult ViewMonthlyExpense()
         {
-            List<Expense> expenses = dataContext.Expenses.Where(i => i.IsApproved).ToList();
+            List<Expense> expenses = _context.Expenses.Where(i => i.IsApproved).ToList();
             return View(expenses);
         }
 
         public IActionResult ViewYearlyProfit()
         {
-            //var incomes = dataContext.Incomes.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
+            //var incomes = context.Incomes.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
             //{
             //    month = key.Month,
             //    income = group.Sum(k => k.Amount)
             //}).ToList();
 
-            //var expenses = dataContext.Expenses.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
+            //var expenses = context.Expenses.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
             //{
             //    month = key.Month,
             //    income = group.Sum(k => k.Amount)
             //}).ToList();
 
-            ////var data = from i in dataContext.Incomes
-            ////    join e in dataContext.Expenses
+            ////var data = from i in context.Incomes
+            ////    join e in context.Expenses
             ////        on i.Date equals e.Date
             ////        group i by 
             //var monthsToDate = Enumerable.Range(1, 12)
@@ -51,7 +51,7 @@ namespace InExRecordApp.Controllers
             //    .ToList();
 
 
-            var q1 = dataContext.Incomes
+            var q1 = _context.Incomes
                 .GroupBy(r => r.Date.Month)
                 .Select(a => new
                 {
@@ -60,7 +60,7 @@ namespace InExRecordApp.Controllers
                 }).ToList();
 
 
-            var q2 = dataContext.Expenses
+            var q2 = _context.Expenses
                 .GroupBy(r => r.Date.Month)
                 .Select(a => new
                 {

@@ -35,7 +35,7 @@ namespace InExRecordApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<DataContext>(options => 
+            services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("InExRecordDBConnection")));
 
             services.AddSession();

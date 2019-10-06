@@ -10,11 +10,11 @@ namespace InExRecordApp.Controllers
 {
     public class ExpenseController : Controller
     {
-        private readonly DataContext dataContext;
+        private readonly AppDbContext _context;
 
-        public ExpenseController(DataContext dataContext)
+        public ExpenseController(AppDbContext context)
         {
-            this.dataContext = dataContext;
+            _context = context;
         }
 
         [HttpGet]
@@ -31,8 +31,8 @@ namespace InExRecordApp.Controllers
                 try
                 {
                     expense.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
-                    dataContext.Expenses.Add(expense);
-                    dataContext.SaveChanges();
+                    _context.Expenses.Add(expense);
+                    _context.SaveChanges();
 
                     return Json(new
                     {
@@ -53,7 +53,7 @@ namespace InExRecordApp.Controllers
         [HttpGet]
         public IActionResult Show()
         {
-            List<Expense> expenses = dataContext.Expenses.Where(e => e.IsApproved == false).ToList();
+            List<Expense> expenses = _context.Expenses.Where(e => e.IsApproved == false).ToList();
             return View(expenses);
         }
 
@@ -62,14 +62,14 @@ namespace InExRecordApp.Controllers
         {
             try
             {
-                var entity = dataContext.Expenses.Where(i => ids.Contains(i.Id));
+                var entity = _context.Expenses.Where(i => ids.Contains(i.Id));
 
                 foreach (var e in entity)
                 {
                     e.IsApproved = true;
-                    dataContext.Expenses.Update(e);
+                    _context.Expenses.Update(e);
                 }
-                dataContext.SaveChanges();
+                _context.SaveChanges();
 
                 return Json(new { success = true, redirecturl = Url.Action("Show", "Expense"), message = "Data approved!" });
             }

@@ -11,10 +11,10 @@ namespace InExRecordApp.Controllers
 {
     public class IncomeController : Controller
     {
-        private readonly DataContext dataContext;
-        public IncomeController(DataContext dataContext)
+        private readonly AppDbContext _context;
+        public IncomeController(AppDbContext context)
         {
-            this.dataContext = dataContext;
+            _context = context;
         }
 
         [HttpGet]
@@ -32,8 +32,8 @@ namespace InExRecordApp.Controllers
                 try
                 {
                     income.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
-                    dataContext.Incomes.Add(income);
-                    dataContext.SaveChanges();
+                    _context.Incomes.Add(income);
+                    _context.SaveChanges();
 
                     return Json(new
                     {
@@ -54,7 +54,7 @@ namespace InExRecordApp.Controllers
         [HttpGet]
         public IActionResult Show()
         {
-            List<Income> incomes = dataContext.Incomes.Where(i => i.IsApproved == false).ToList();
+            List<Income> incomes = _context.Incomes.Where(i => i.IsApproved == false).ToList();
             return View(incomes);
         }
 
@@ -63,14 +63,14 @@ namespace InExRecordApp.Controllers
         {
             try
             {
-                var entity = dataContext.Incomes.Where(i => ids.Contains(i.Id));
+                var entity = _context.Incomes.Where(i => ids.Contains(i.Id));
 
                 foreach (var e in entity)
                 {
                     e.IsApproved = true;
-                    dataContext.Incomes.Update(e);
+                    _context.Incomes.Update(e);
                 }
-                dataContext.SaveChanges();
+                _context.SaveChanges();
 
                 return Json(new { success = true, redirecturl = Url.Action("Show", "Income"), message = "Data approved!" });
             }

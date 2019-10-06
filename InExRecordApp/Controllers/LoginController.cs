@@ -10,11 +10,11 @@ namespace InExRecordApp.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly DataContext dataContext;
+        private readonly AppDbContext _context;
 
-        public LoginController(DataContext dataContext)
+        public LoginController(AppDbContext context)
         {
-            this.dataContext = dataContext;
+            this._context = context;
         }
 
         [HttpGet]
@@ -42,7 +42,7 @@ namespace InExRecordApp.Controllers
 
         private User CheckLogin(string email, string password)
         {
-            var user = dataContext.Users.SingleOrDefault(u => u.Email.Equals(email));
+            var user = _context.Users.SingleOrDefault(u => u.Email.Equals(email));
             if (user != null)
             {
                 if (BCrypt.Net.BCrypt.Verify(password, user.Password))
