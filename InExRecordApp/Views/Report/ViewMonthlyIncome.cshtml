@@ -3,73 +3,67 @@
 @{
     ViewBag.Title = "Monthly Report";
     int i = 0;
+    string month = ViewBag.Month;
+    string year = ViewBag.Year;
 }
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
     <div class="panel panel-default">
         <div class="panel-title">
-            <h4>View monthly incomes(s)</h4>
+            <h4>View monthly expense(s)</h4>
         </div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <select class="form-control">
-                    <option value="">Select Month</option>
-                    <option value="January">January</option>
-                    <option value="February">February</option>
-                    <option value="March">March</option>
-                    <option value="April">April</option>
-                    <option value="May">May</option>
-                    <option value="June">June</option>
-                    <option value="July">July</option>
-                    <option value="August">August</option>
-                    <option value="September">September</option>
-                    <option value="October">October</option>
-                    <option value="November">November</option>
-                    <option value="December">December</option>
-                </select>
+        <form method="get">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <select class="form-control" name="month" id="month" asp-items="Helper.GetMonths()"></select>
+                </div>
+                <div class="form-group col-md-6">
+                    <select class="form-control" name="year" id="year" asp-items="Helper.GetYears()"></select>
+                </div>
+
+                <div class="col-md-12">
+                    <button class="btn btn-success pull-right" id="getData" type="submit"> Show </button>
+                </div>
+                <br /><br />
             </div>
-            <div class="form-group col-md-6">
-                <select class="form-control">
-                    <option value="">Select Year</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                </select>
-            </div>
-            
-            <div class="col-md-12">
-                <button class="btn btn-success pull-right"> Show </button>
-            </div>
-            <br /><br />
-        </div>
-        
+        </form>
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
-                    <tr>
-                        <th>Sl</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Cash/Cheque</th>
-                        <th>Bank Name</th>
-                        <th>Particular</th>
-                    </tr>
+                        <tr>
+                            <th>Sl</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Cash/Cheque</th>
+                            <th>Bank Name</th>
+                            <th>Particular</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach (Income income in Model)
-                    {
-                        <tr>
-                            <td>@{ i++; }</td>
-                            <td>@income.Date.ToString("yyyy MMMM dd")</td>
-                            <td>@income.Amount</td>
-                            <td>@income.IncomeType</td>
-                            <td>@income.BankName</td>
-                            <td>@income.Particular</td>
-                        </tr>
-                    }
+                        @if (Model.Count > 0)
+                        {
+                            foreach (Income income in Model)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@income.Date.ToString("yyyy MMMM dd")</td>
+                                    <td>@income.Amount</td>
+                                    <td>@income.IncomeType</td>
+                                    <td>@income.BankName</td>
+                                    <td>@income.Particular</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr class="warning text-center">
+                                <td colspan="6">No information found</td>
+                            </tr>
+                        }
+
                     </tbody>
                 </table>
             </div>
@@ -79,3 +73,11 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script>
+            $(function () {
+                $('#month').val('@month');
+                $('#year').val('@year');
+            });
+    </script>
+}

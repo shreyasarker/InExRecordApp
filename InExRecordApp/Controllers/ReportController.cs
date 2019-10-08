@@ -17,9 +17,17 @@ namespace InExRecordApp.Controllers
         {
             _context = context;
         }
-        public IActionResult ViewMonthlyIncome()
+        public IActionResult ViewMonthlyIncome(string month = "", string year = "")
         {
-            List<Income> incomes = _context.Incomes.Where(i => i.IsApproved).ToList();
+            if (string.IsNullOrEmpty(month) && string.IsNullOrEmpty(year))
+            {
+                month = DateTime.Now.ToString("MMMM");
+                year = DateTime.Now.ToString("yyyy");
+            }
+           
+            List<Income> incomes = _context.Incomes.Where(i => i.IsApproved)
+                .Where(i => i.Date.ToString("MMMM") == month &&
+                    i.Date.ToString("yyyy") == year).ToList();
             return View(incomes);
         }
 
@@ -31,8 +39,7 @@ namespace InExRecordApp.Controllers
                 month = DateTime.Now.ToString("MMMM");
                 year = DateTime.Now.ToString("yyyy");
             }
-            List<Expense> expenses;
-            expenses = _context.Expenses
+            List<Expense> expenses = _context.Expenses
                 .Where(i => i.IsApproved)
                 .Where(i => i.Date.ToString("MMMM") == month &&
                             i.Date.ToString("yyyy") == year).ToList();
@@ -41,14 +48,6 @@ namespace InExRecordApp.Controllers
             return View(expenses);
         }
 
-        //[HttpPost]
-        //public IActionResult ViewMonthlyExpense(string month, string year)
-        //{
-        //    List<Expense> expenses = _context.Expenses
-        //        .Where(i => i.IsApproved)
-        //        .Where(i => i.Date.ToString("MMMM") == month && i.Date.ToString("yyyy") == year).ToList();
-        //    return PartialView("_PartialExpense", expenses);
-        //}
         public IActionResult ViewYearlyProfit()
         {
             //var incomes = context.Incomes.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
