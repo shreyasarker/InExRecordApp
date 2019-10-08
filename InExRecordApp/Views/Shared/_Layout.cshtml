@@ -14,7 +14,7 @@
     <title>@ViewBag.Title - InExRecordApp</title>
     <link rel="icon" type="image/png" href="~/login/images/icons/favicon.ico" />
 
-    @if (controller == "Login")
+    @if (controller == "Account")
     {
         <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="~/lib/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -32,22 +32,22 @@
 </head>
 <body>
 
-    @if (controller != "Login")
+    @if (controller != "Account")
     {
         <partial name="_NavBar" />
     }
 
     @RenderBody()
 
-    @if (controller != "Login")
+    @if (controller != "Account")
     {
 
         <partial name="_Footer" />
     }
 
-    @if (controller == "Login")
+    @if (controller == "Account")
     {
-        <script src="~/lib/jquery/jquery-3.2.1.min.js"></script>
+        
     }
 
     else if (action == "Show")

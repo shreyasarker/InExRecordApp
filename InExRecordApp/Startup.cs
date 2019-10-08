@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InExRecordApp.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -45,6 +46,7 @@ namespace InExRecordApp
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.AddAntiforgery(options =>
             {
                 options.Cookie.Name = "X-CSRF-TOKEN-MOONGLADE";
@@ -67,6 +69,7 @@ namespace InExRecordApp
             app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            //app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

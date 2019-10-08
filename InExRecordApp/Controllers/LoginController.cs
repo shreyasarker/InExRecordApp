@@ -37,6 +37,7 @@ namespace InExRecordApp.Controllers
                 return View(aUser);
             }
             HttpContext.Session.SetInt32("userId", user.Id);
+
             return RedirectToAction("Index", "Dashboard");
         }
 
@@ -52,5 +53,6 @@ namespace InExRecordApp.Controllers
             }
             return null;
         }
+        
     }
 }

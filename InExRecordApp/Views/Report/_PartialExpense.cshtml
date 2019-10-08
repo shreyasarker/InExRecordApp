@@ -1,0 +1,19 @@
+﻿@model List<Expense>
+
+@{
+    int i = 0;
+}
+                        
+@foreach (Expense expense in Model)
+{
+    i++;
+    <tr>
+        <td>@i</td>
+        <td>@expense.Date.ToString("yyyy MMMM dd")</td>
+        <td>@expense.Amount</td>
+        <td>@expense.ExpenseType</td>
+        <td>@expense.BankName</td>
+        <td>@expense.Particular</td>
+    </tr>
+}
+
