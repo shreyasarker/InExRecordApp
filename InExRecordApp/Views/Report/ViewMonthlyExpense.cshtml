@@ -78,25 +78,6 @@
             $(function () {
                 $('#month').val('@month');
                 $('#year').val('@year');
-                @*getData();
-                $('#getData').click(function(e) {
-                    e.preventDefault();
-                    getData();
-                });
-                function getData() {
-                    $.ajax({
-                        type: 'get',
-                        url: '@Url.Action("ViewMonthlyExpense")',
-                        headers: {
-                            "CSRF-TOKEN-MOONGLADE-FORM": $('input[name="CSRF-TOKEN-MOONGLADE-FORM"]').val()
-                        },
-                        data: {month: $('#month').val(), year: $('#year').val()}
-                    }).done(function(response) {
-                        $('#expense-data').html(response);
-                    }).fail(function(error) {
-
-                    });
-                }*@
             });
         </script>
     }
