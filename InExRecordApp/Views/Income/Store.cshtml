@@ -15,8 +15,6 @@
         });
     });
 </script>
-
-
 <style>
     .cheque:focus ~ .chequeprops {
         display: none;
@@ -26,6 +24,7 @@
         display: block;
     }
 </style>
+
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
     <form method="post" asp-antiforgery="true">
@@ -67,7 +66,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 @section Scripts{
-
     <script>
         $(function () {
             $('#submit').click(function(e) {
