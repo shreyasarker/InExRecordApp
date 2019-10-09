@@ -1,8 +1,10 @@
-﻿@model List<Income>
+﻿@using System.Globalization
+@model List<YearlyDataModelView>
 
 @{
     ViewBag.Title = "Yearly Report";
-    int i = 0;
+    int year = ViewBag.Year;
+    DateTimeFormatInfo month = new DateTimeFormatInfo();
 }
 
 
@@ -13,6 +15,17 @@
         <div class="panel-title">
             <h4>Yearly Income Expense Report</h4>
         </div>
+        <form method="get">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <select class="form-control" name="year" id="year" asp-items="Helper.GetYears()"></select>
+                </div>
+                <div class="col-md-4 text-right">
+                    <button class="btn btn-success pull-right" id="getData" type="submit"> Show </button>
+                </div>
+                <br /><br />
+            </div>
+        </form>
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable">
@@ -25,16 +38,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (Income income in Model)
+                        @if (Model.Count > 0)
                         {
-                            <tr>
-                                <td>@{ i = i + 1; }</td>
-                                <td>@income.Date.ToString("yyyy MMMM dd")</td>
-                                <td>@income.Amount</td>
-                                <td>@income.IncomeType</td>
-                                <td>@income.BankName</td>
-                                <td>@income.Particular</td>
-                                <td class="checkbox text-center"><label><input name="isApproved[]" value="@income.Id" type="checkbox" /></label></td>
+                            foreach (var yearlyData in Model)
+                            {
+                                <tr>
+                                    <td>@month.GetMonthName(yearlyData.MonthId)</td>
+                                    <td>@yearlyData.IncomeAmount</td>
+                                    <td>@yearlyData.ExpenseAmount</td>
+                                    <td>@yearlyData.Profit</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr class="warning text-center">
+                                <td colspan="4">No information found</td>
                             </tr>
                         }
                     </tbody>
@@ -49,28 +68,9 @@
 
 @section Scripts{
     <script>
-        $(function() {
-            $('#save').click(function(e) {
-                e.preventDefault();
-
-                var ids = [];
-
-                $(':checkbox:checked').each(function() {
-                    ids.push($(this).val());
-                });
-
-                $.ajax({
-                    type: 'POST',
-                    url: '@Url.Action("Approve", "Income")',
-                    data: {ids: ids}
-                }).done(function(response) {
-                    if (response.success) {
-                        window.location.href = response.redirecturl;
-                    }
-                }).fail(function(error) {
-
-                });
-            });
+        $(function () {
+            $('#month').val('@month');
+            $('#year').val('@year');
         });
     </script>
 }

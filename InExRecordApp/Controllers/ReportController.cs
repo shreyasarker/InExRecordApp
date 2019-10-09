@@ -28,6 +28,10 @@ namespace InExRecordApp.Controllers
             List<Income> incomes = _context.Incomes.Where(i => i.IsApproved)
                 .Where(i => i.Date.ToString("MMMM") == month &&
                     i.Date.ToString("yyyy") == year).ToList();
+
+            ViewBag.Month = month;
+            ViewBag.Year = year;
+
             return View(incomes);
         }
 
@@ -43,65 +47,69 @@ namespace InExRecordApp.Controllers
                 .Where(i => i.IsApproved)
                 .Where(i => i.Date.ToString("MMMM") == month &&
                             i.Date.ToString("yyyy") == year).ToList();
+
             ViewBag.Month = month;
             ViewBag.Year = year;
+
             return View(expenses);
         }
 
-        public IActionResult ViewYearlyProfit()
+        public IActionResult ViewYearlyProfit(int? year)
         {
-            //var incomes = context.Incomes.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
-            //{
-            //    month = key.Month,
-            //    income = group.Sum(k => k.Amount)
-            //}).ToList();
-
-            //var expenses = context.Expenses.Select(k => new { k.Date.Month, k.Amount }).GroupBy(x => new { x.Month }, (key, group) => new
-            //{
-            //    month = key.Month,
-            //    income = group.Sum(k => k.Amount)
-            //}).ToList();
-
-            ////var data = from i in context.Incomes
-            ////    join e in context.Expenses
-            ////        on i.Date equals e.Date
-            ////        group i by 
-            //var monthsToDate = Enumerable.Range(1, 12)
-            //    .Select(m => new DateTime(DateTime.Today.Year, m, 1))
-            //    .ToList();
-
-
-            var q1 = _context.Incomes
-                .GroupBy(r => r.Date.Month)
+            if (year == null)
+            {
+                year = DateTime.Now.Year;
+            }
+            var income = _context.Incomes
+                .Where(x => x.Date.Year.Equals(year))
+                .GroupBy(x => x.Date.Month)
                 .Select(a => new
                 {
-                    Month = a.Key,
-                    Amount = a.Sum(r => r.Amount)
-                }).ToList();
+                    month = a.Key,
+                    amount = a.Sum(r => r.Amount),
+                });
 
-
-            var q2 = _context.Expenses
-                .GroupBy(r => r.Date.Month)
+            var expense = _context.Expenses
+                .Where(x => x.Date.Year.Equals(year))
+                .GroupBy(x => x.Date.Month)
                 .Select(a => new
                 {
-                    Month = a.Key,
-                    Amount = a.Sum(r => r.Amount)
-                }).ToList();
-            List<YearlyData> yearlyDatas = new List<YearlyData>();
-            //foreach (var a in q1)
-            //{
-            //    yearl
-            //}
-            var data = (from i in q1
-                join e in q2 on i.Month equals e.Month
-                group new {i, e} by e.Month into v
-                    select new
-                    {
-                        Month = v.Key,
-                        incomeAmount = v.Max(x => x.i.Amount),
-                        expenseAmount = v.Max(x => x.e.Amount),
-                    });
-            return Json(new {data = data});
+                    month = a.Key,
+                    amount = a.Sum(r => r.Amount),
+                });
+
+
+            var leftJoin = (from i in income
+                            join e in expense on i.month equals e.month into temp
+                            from e in temp.DefaultIfEmpty()
+                            select new
+                            {
+                                MonthId = i.month,
+                                IncomeAmount = i.amount,
+                                ExpenseAmount = e != null ? e.amount : 0
+                            });
+
+            var rightJoin = (from e in expense
+                             join i in income on e.month equals i.month into temp
+                             from i in temp.DefaultIfEmpty()
+                             select new
+                             {
+                                 MonthId = e.month,
+                                 IncomeAmount = i != null ? i.amount : 0,
+                                 ExpenseAmount = e.amount
+                             });
+
+            List<YearlyDataModelView> data = leftJoin.Union(rightJoin).Select(x => new YearlyDataModelView()
+            {
+                MonthId = x.MonthId,
+                IncomeAmount = x.IncomeAmount,
+                ExpenseAmount = x.ExpenseAmount,
+                Profit = x.IncomeAmount - x.ExpenseAmount
+            }).OrderBy(x => x.MonthId).ToList();
+
+            ViewBag.Year = year;
+
+            return View(data);
         }
     }
 }
