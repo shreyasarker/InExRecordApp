@@ -65,7 +65,10 @@ namespace InExRecordApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hi!");
+            });
             app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
