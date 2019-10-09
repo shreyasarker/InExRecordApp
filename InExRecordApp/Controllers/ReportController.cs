@@ -4,9 +4,13 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using InExRecordApp.Models;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Rotativa.AspNetCore;
+using Syncfusion.HtmlConverter;
 
 namespace InExRecordApp.Controllers
 {
@@ -104,7 +108,7 @@ namespace InExRecordApp.Controllers
                 MonthId = x.MonthId,
                 IncomeAmount = x.IncomeAmount,
                 ExpenseAmount = x.ExpenseAmount,
-                Profit = x.IncomeAmount - x.ExpenseAmount
+                Profit = x.IncomeAmount - x.ExpenseAmount,
             }).OrderBy(x => x.MonthId).ToList();
 
             ViewBag.Year = year;

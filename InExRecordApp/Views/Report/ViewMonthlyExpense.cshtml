@@ -1,7 +1,7 @@
 ﻿@model List<Expense>
 
 @{
-    ViewBag.Title = "Monthly Report";
+    ViewBag.Title = "Monthly Report: Expenses";
     int i = 0;
     string month = ViewBag.Month;
     string year = ViewBag.Year;
@@ -15,14 +15,13 @@
         </div>
         <form method="get">
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <select class="form-control" name="month" id="month" asp-items="Helper.GetMonths()"></select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <select class="form-control" name="year" id="year" asp-items="Helper.GetYears()"></select>
                 </div>
-
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <button class="btn btn-success pull-right" id="getData" type="submit"> Show </button>
                 </div>
                 <br /><br />
@@ -30,7 +29,7 @@
         </form>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="dataTable">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -42,34 +41,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Count > 0)
-                        {
-                            foreach (Expense expense in Model)
-                            {
-                                i++;
-                                <tr>
-                                    <td>@i</td>
-                                    <td>@expense.Date.ToString("yyyy MMMM dd")</td>
-                                    <td>@expense.Amount</td>
-                                    <td>@expense.ExpenseType</td>
-                                    <td>@expense.BankName</td>
-                                    <td>@expense.Particular</td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr class="warning text-center">
-                                <td colspan="6">No information found</td>
-                            </tr>
-                        }
-
+                    @foreach (Expense expense in Model)
+                    {
+                        i++;
+                        <tr>
+                            <td>@i</td>
+                            <td>@expense.Date.ToString("yyyy MMMM dd")</td>
+                            <td>@expense.Amount</td>
+                            <td>@expense.ExpenseType</td>
+                            <td>@expense.BankName</td>
+                            <td>@expense.Particular</td>
+                        </tr>
+                    }
                     </tbody>
+                    <thead>
+                    <tr>
+                        <th colspan="2">Total</th>
+                        <th>@Model.Sum(x=>x.Amount)</th>
+                        <th colspan="3"></th>
+                    </tr>
+                    </thead>
                 </table>
             </div>
-        </div>
-        <div class="panel-footer text-right">
-            <a class="btn btn-primary" href="#">PDF</a>
         </div>
     </div>
 </div>

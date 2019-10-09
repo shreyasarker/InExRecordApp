@@ -1,7 +1,7 @@
 ﻿@model List<Income>
 
 @{
-    ViewBag.Title = "Monthly Report";
+    ViewBag.Title = "Monthly Report: Incomes";
     int i = 0;
     string month = ViewBag.Month;
     string year = ViewBag.Year;
@@ -11,18 +11,17 @@
     <h2>@ViewBag.Title</h2>
     <div class="panel panel-default">
         <div class="panel-title">
-            <h4>View monthly expense(s)</h4>
+            <h4>View monthly income(s)</h4>
         </div>
         <form method="get">
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <select class="form-control" name="month" id="month" asp-items="Helper.GetMonths()"></select>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <select class="form-control" name="year" id="year" asp-items="Helper.GetYears()"></select>
                 </div>
-
-                <div class="col-md-12">
+                <div class="col-md-4">
                     <button class="btn btn-success pull-right" id="getData" type="submit"> Show </button>
                 </div>
                 <br /><br />
@@ -30,7 +29,7 @@
         </form>
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped" id="dataTable">
                     <thead>
                         <tr>
                             <th>Sl</th>
@@ -42,34 +41,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Count > 0)
+                        @foreach (Income income in Model)
                         {
-                            foreach (Income income in Model)
-                            {
-                                i++;
-                                <tr>
-                                    <td>@i</td>
-                                    <td>@income.Date.ToString("yyyy MMMM dd")</td>
-                                    <td>@income.Amount</td>
-                                    <td>@income.IncomeType</td>
-                                    <td>@income.BankName</td>
-                                    <td>@income.Particular</td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr class="warning text-center">
-                                <td colspan="6">No information found</td>
+                            i++;
+                            <tr>
+                                <td>@i</td>
+                                <td>@income.Date.ToString("yyyy MMMM dd")</td>
+                                <td>@income.Amount</td>
+                                <td>@income.IncomeType</td>
+                                <td>@income.BankName</td>
+                                <td>@income.Particular</td>
                             </tr>
                         }
-
                     </tbody>
+                    <thead>
+                        <tr>
+                            <th colspan="2">Total</th>
+                            <th>@Model.Sum(x=>x.Amount)</th>
+                            <th colspan="3"></th>
+                        </tr>
+                    </thead>
                 </table>
             </div>
-        </div>
-        <div class="panel-footer text-right">
-            <a class="btn btn-primary" href="#">PDF</a>
         </div>
     </div>
 </div>

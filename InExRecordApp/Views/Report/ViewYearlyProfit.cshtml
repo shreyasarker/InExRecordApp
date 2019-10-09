@@ -7,8 +7,6 @@
     DateTimeFormatInfo month = new DateTimeFormatInfo();
 }
 
-
-
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
     <div class="panel panel-default">
@@ -17,10 +15,10 @@
         </div>
         <form method="get">
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <select class="form-control" name="year" id="year" asp-items="Helper.GetYears()"></select>
                 </div>
-                <div class="col-md-4 text-right">
+                <div class="col-md-6">
                     <button class="btn btn-success pull-right" id="getData" type="submit"> Show </button>
                 </div>
                 <br /><br />
@@ -38,30 +36,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model.Count > 0)
-                        {
-                            foreach (var yearlyData in Model)
-                            {
-                                <tr>
-                                    <td>@month.GetMonthName(yearlyData.MonthId)</td>
-                                    <td>@yearlyData.IncomeAmount</td>
-                                    <td>@yearlyData.ExpenseAmount</td>
-                                    <td>@yearlyData.Profit</td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr class="warning text-center">
-                                <td colspan="4">No information found</td>
-                            </tr>
-                        }
+                    @foreach (YearlyDataModelView yearlyData in Model)
+                    {
+                        <tr>
+                            <td>@month.GetMonthName(yearlyData.MonthId)</td>
+                            <td>@yearlyData.IncomeAmount</td>
+                            <td>@yearlyData.ExpenseAmount</td>
+                            <td>@yearlyData.Profit</td>
+                        </tr>
+                    }
                     </tbody>
+                    <thead>
+                    <tr>
+                        <th>Total</th>
+                        <th>@Model.Sum(x=>x.IncomeAmount)</th>
+                        <th>@Model.Sum(x=>x.ExpenseAmount)</th>
+                        <th>@Model.Sum(x=>x.Profit)</th>
+                    </tr>
+                    </thead>
                 </table>
             </div>
-        </div>
-        <div class="panel-footer text-right">
-            <button class="btn btn-primary" id="save" type="submit">Save</button>
         </div>
     </div>
 </div>
