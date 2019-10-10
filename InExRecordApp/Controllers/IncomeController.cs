@@ -31,7 +31,7 @@ namespace InExRecordApp.Controllers
             {
                 try
                 {
-                    income.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
+                    income.UserId = HttpContext.Session.GetInt32("userId").ToString();
                     _context.Incomes.Add(income);
                     _context.SaveChanges();
 

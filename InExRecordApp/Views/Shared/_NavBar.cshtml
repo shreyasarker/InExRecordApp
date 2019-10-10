@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@inject SignInManager<AppUser> signInManager;
+@inject UserManager<AppUser> UserManager;
 
 <header class="header_area clearfix" style="background: lightseagreen;">
     <div class="container-fluid h-100">
@@ -13,7 +14,7 @@
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mosh-navbar" aria-controls="mosh-navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse justify-content-end" id="mosh-navbar">
-                            @if (!string.IsNullOrEmpty(Context.Session.GetInt32("userId").ToString()))
+                            @if (signInManager.IsSignedIn(User))
                             {
                                 <ul class="navbar-nav animated" id="nav">
                                     <li class="nav-item active"><a asp-action="Index" asp-controller="Dashboard" class="nav-link" style="color: white;">Dashboard</a></li>
@@ -41,7 +42,9 @@
                                     </li>
                                 </ul>
                                 <div class="login-register-btn">
-                                    <a asp-action="Logout" asp-controller="Account" style="color: white; font-size: 18px;">Logout</a>
+                                    <form method="post" asp-action="Logout" asp-controller="Account">
+                                        <button type="submit" style="color: white; font-size: 18px;" href="#">Logout</button>
+                                    </form>
                                 </div>
                             }
                             else
@@ -51,7 +54,7 @@
                                 </div>
                             }
                         </div>
-                     </nav>
+                    </nav>
                 </div>
             </div>
         </div>

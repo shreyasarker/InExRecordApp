@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InExRecordApp.Models;
+using InExRecordApp.Seeder;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +39,13 @@ namespace InExRecordApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 8;
+                    options.Password.RequiredUniqueChars = 0;
+                    options.Password.RequireUppercase = false;
+                }).AddEntityFrameworkStores<AppDbContext>();
+
             services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("InExRecordDBConnection")));
 
@@ -56,7 +65,8 @@ namespace InExRecordApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            AppDbContext context, UserManager<AppUser> userManager ,RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -66,14 +76,14 @@ namespace InExRecordApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hi!");
-            });
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync("Hi!");
+            //});
             app.UseSession();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -81,7 +91,7 @@ namespace InExRecordApp
                     name: "default",
                     template: "{controller=LandingPage}/{action=Index}/{id?}");
             });
-            RotativaConfiguration.Setup(env);
+            TableSeeder.Initialize(context, userManager, roleManager).Wait();
         }
     }
 }

@@ -12,10 +12,9 @@ namespace InExRecordApp.Models
     {
         public int Id { get; set; }
 
-        [Column(TypeName = "int")]
         [Required]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
+        public AppUser User { get; set; }
 
         [Column(TypeName = "varchar(20)")]
         [Required(ErrorMessage = "Expense Type is required")]

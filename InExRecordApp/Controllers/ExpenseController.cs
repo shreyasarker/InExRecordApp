@@ -30,7 +30,7 @@ namespace InExRecordApp.Controllers
             {
                 try
                 {
-                    expense.UserId = Convert.ToInt32(HttpContext.Session.GetInt32("userId"));
+                    expense.UserId = HttpContext.Session.GetInt32("userId").ToString();
                     _context.Expenses.Add(expense);
                     _context.SaveChanges();
 
