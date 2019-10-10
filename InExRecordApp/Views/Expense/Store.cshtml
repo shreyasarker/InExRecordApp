@@ -1,4 +1,5 @@
-﻿@model Expense
+﻿@using System.Security.Claims
+@model Expense
 
 @{
     ViewBag.Title = "Store Expense";
@@ -6,7 +7,7 @@
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
-    <form method="post" asp-antiforgery="true">
+    <form method="post" asp-action="Store" asp-controller="Expense">
         <div class="form-group">
             <label asp-for="Amount">Amount:</label>
             <input asp-for="Amount" type="text" class="form-control" placeholder="Enter amount">
@@ -40,11 +41,11 @@
             <input type="text" asp-for="Date" class="form-control datepicker">
             <span asp-validation-for="Date" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-default" id="submit">Submit</button>
+        <input type="hidden" asp-for="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" />
+        <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 @section Scripts{
     <script>
         $(function () {
@@ -53,31 +54,6 @@
             });
             $("#show").click(function () {
                 $(".chequeprops").show(500);
-            });
-            $('#submit').click(function(e) {
-                e.preventDefault();
-                $.validator.unobtrusive.parse($('form'));
-                if ($('form').valid()) {
-                    $.ajax({
-                        type: 'post',
-                        url: '@Url.Action("Store", "Expense")',
-                        headers: {
-                            "CSRF-TOKEN-MOONGLADE-FORM": $('input[name="CSRF-TOKEN-MOONGLADE-FORM"]').val()
-                        },
-                        data: $('form').serialize()
-
-                    }).done(function (response) {
-
-                        swal("Expense is Stored", "", "success").then(function () {
-                            window.location.href = response.redirecturl;
-                        });
-
-
-                    }).fail(function (error) {
-
-                    });
-
-                }
             });
         });
     </script>

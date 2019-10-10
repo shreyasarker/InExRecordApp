@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "View Income";
     int i = 0;
+    bool isSrAccount = User.IsInRole("SrAccountant");
 }
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
@@ -12,6 +13,20 @@
             <h4>View and approve pending Income(s)</h4>
         </div>
         <div class="panel-body">
+            @if (TempData.ContainsKey("success"))
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> @TempData["success"].ToString()
+                </div>
+            }
+            else if (TempData.ContainsKey("error"))
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> @TempData["error"].ToString()
+                </div>
+            }
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable">
                     <thead>
@@ -20,31 +35,50 @@
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Cash/Cheque</th>
-                            <th>Bank Name</th>
+                            <th>Cheque Details</th>
                             <th>Particular</th>
-                            <th>Approve</th>
+                            @if (isSrAccount)
+                            {
+                                <th>Approve</th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (Income income in Model)
                         {
+                            i++;
                             <tr>
-                                <td>@{ i = i + 1; }</td>
+                                <td>@i</td>
                                 <td>@income.Date.ToString("yyyy MMMM dd")</td>
                                 <td>@income.Amount</td>
                                 <td>@income.IncomeType</td>
-                                <td>@income.BankName</td>
+                                <td>
+                                    @if (income.IncomeType == "Cheque")
+                                    {
+                                        <span>Check No: @income.ChequeNo <br/> Bank Name: @income.BankName</span>
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </td>
                                 <td>@income.Particular</td>
-                                <td class="checkbox text-center"><label><input name="isApproved[]" value="@income.Id" type="checkbox" /></label></td>
+                                @if (isSrAccount)
+                                {
+                                    <td class="checkbox text-center"><label><input name="isApproved[]" value="@income.Id" type="checkbox" /></label></td>
+                                }
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="panel-footer text-right">
-            <button class="btn btn-primary" id="save" type="submit">Save</button>
-        </div>
+        @if (isSrAccount)
+        {
+            <div class="panel-footer text-right">
+                <button class="btn btn-primary" id="save" type="submit">Save</button>
+            </div>
+        }
     </div>
 </div>
 
@@ -69,7 +103,7 @@
                         window.location.href = response.redirecturl;
                     }
                 }).fail(function(error) {
-                    
+                    console.log(error.responseText);
                 });
             });
         });

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace InExRecordApp.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class DashboardController : Controller
     {
 

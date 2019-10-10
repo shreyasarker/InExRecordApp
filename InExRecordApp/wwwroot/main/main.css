@@ -1,0 +1,24 @@
+    .user-title {
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+        .user-title h3 {
+            color: green;
+        }
+
+    .dashboard-wrapper {
+        margin-top: 120px;
+        margin-bottom: 3px;
+        width: 100%;
+    }
+
+        .dashboard-wrapper img {
+            width: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+		div.dt-buttons {
+                float: right;
+            }

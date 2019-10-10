@@ -1,20 +1,10 @@
-﻿@model Income
+﻿@using System.Security.Claims
+@model Income
 
 @{
     ViewBag.Title = "Store Income";
 }
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#hide").click(function () {
-            $(".chequeprops").hide(500);
-        });
-        $("#show").click(function () {
-            $(".chequeprops").show(500);
-        });
-    });
-</script>
 <style>
     .cheque:focus ~ .chequeprops {
         display: none;
@@ -27,7 +17,7 @@
 
 <div class="container col-md-8" style="margin-top: 150px;margin-bottom: 100px;">
     <h2>@ViewBag.Title</h2>
-    <form method="post" asp-antiforgery="true">
+    <form method="post" asp-action="Store" asp-controller="Income">
         <div class="form-group">
             <label asp-for="Amount">Amount:</label>
             <input asp-for="Amount" type="text" class="form-control" placeholder="Enter amount">
@@ -54,43 +44,27 @@
         <div class="form-group">
             <label asp-for="Particular">Particular:</label>
             <textarea asp-for="Particular" class="form-control" placeholder="Write.."></textarea>
+            <span asp-validation-for="Particular" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Date">Date:</label>
             <input type="text" asp-for="Date" class="form-control datepicker">
             <span asp-validation-for="Date" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-default" id="submit">Submit</button>
+        <input type="hidden" asp-for="UserId" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)"/>
+        <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 @section Scripts{
+    
     <script>
         $(function () {
-            $('#submit').click(function(e) {
-                e.preventDefault();
-                $.validator.unobtrusive.parse($('form'));
-                if ($('form').valid()) {
-                    $.ajax({
-                        type: 'post',
-                        url: '@Url.Action("Store", "Income")',
-                        headers: {
-                            "CSRF-TOKEN-MOONGLADE-FORM": $('input[name="CSRF-TOKEN-MOONGLADE-FORM"]').val()
-                        },
-                        data: $('form').serialize()
-
-                    }).done(function (response) {
-
-                        swal("Income is Stored", "", "success").then(function() {
-                            window.location.href = response.redirecturl;
-                        });
-
-                    }).fail(function (error) {
-
-                    });
-
-                }
+            $("#hide").click(function () {
+                $(".chequeprops").hide(500);
+            });
+            $("#show").click(function () {
+                $(".chequeprops").show(500);
             });
         });
     </script>

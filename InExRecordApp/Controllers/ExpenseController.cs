@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using InExRecordApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InExRecordApp.Controllers
 {
+    [Authorize]
     public class ExpenseController : Controller
     {
         private readonly AppDbContext _context;
@@ -20,6 +22,10 @@ namespace InExRecordApp.Controllers
         [HttpGet]
         public IActionResult Store()
         {
+            if (User.IsInRole("SrAccountant"))
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
             return View();
         }
 
@@ -30,20 +36,16 @@ namespace InExRecordApp.Controllers
             {
                 try
                 {
-                    expense.UserId = HttpContext.Session.GetInt32("userId").ToString();
                     _context.Expenses.Add(expense);
                     _context.SaveChanges();
 
-                    return Json(new
-                    {
-                        success = true,
-                        redirecturl = Url.Action("Show", "Expense"),
-                        message = "Data Submited!"
-                    });
+                    TempData["success"] = "Data Submited!";
+                    return RedirectToAction("Show", "Expense");
                 }
                 catch (Exception e)
                 {
-                    return Json(new { success = false, message = e.Message });
+                    TempData["error"] = e.Message;
+                    return View();
                 }
 
             }
@@ -71,10 +73,13 @@ namespace InExRecordApp.Controllers
                 }
                 _context.SaveChanges();
 
-                return Json(new { success = true, redirecturl = Url.Action("Show", "Expense"), message = "Data approved!" });
+                TempData["success"] = "Data approved!";
+
+                return Json(new { success = true, redirecturl = Url.Action("Show", "Expense") });
             }
             catch (Exception e)
             {
+                TempData["success"] = e.Message;
                 return Json(new { success = false, message = e.Message });
             }
            

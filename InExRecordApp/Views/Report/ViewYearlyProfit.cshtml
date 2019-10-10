@@ -30,9 +30,9 @@
                     <thead>
                         <tr>
                             <th>Month</th>
-                            <th>Income</th>
-                            <th>Expense</th>
-                            <th>Profit</th>
+                            <th style="text-align: center">Income</th>
+                            <th style="text-align: center">Expense</th>
+                            <th style="text-align: center">Profit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,18 +40,18 @@
                     {
                         <tr>
                             <td>@month.GetMonthName(yearlyData.MonthId)</td>
-                            <td>@yearlyData.IncomeAmount</td>
-                            <td>@yearlyData.ExpenseAmount</td>
-                            <td>@yearlyData.Profit</td>
+                            <td style="text-align: center">@yearlyData.IncomeAmount</td>
+                            <td style="text-align: center">@yearlyData.ExpenseAmount</td>
+                            <td style="text-align: center">@yearlyData.Profit</td>
                         </tr>
                     }
                     </tbody>
                     <thead>
                     <tr>
                         <th>Total</th>
-                        <th>@Model.Sum(x=>x.IncomeAmount)</th>
-                        <th>@Model.Sum(x=>x.ExpenseAmount)</th>
-                        <th>@Model.Sum(x=>x.Profit)</th>
+                        <th style="text-align: center">@Model.Sum(x=>x.IncomeAmount)</th>
+                        <th style="text-align: center">@Model.Sum(x=>x.ExpenseAmount)</th>
+                        <th style="text-align: center">@Model.Sum(x=>x.Profit)</th>
                     </tr>
                     </thead>
                 </table>

@@ -34,9 +34,9 @@
                         <tr>
                             <th>Sl</th>
                             <th>Date</th>
-                            <th>Amount</th>
+                            <th style="text-align: center">Amount</th>
                             <th>Cash/Cheque</th>
-                            <th>Bank Name</th>
+                            <th>Cheque Details</th>
                             <th>Particular</th>
                         </tr>
                     </thead>
@@ -47,9 +47,18 @@
                         <tr>
                             <td>@i</td>
                             <td>@expense.Date.ToString("yyyy MMMM dd")</td>
-                            <td>@expense.Amount</td>
+                            <td style="text-align: center">@expense.Amount</td>
                             <td>@expense.ExpenseType</td>
-                            <td>@expense.BankName</td>
+                            <td>
+                                @if (expense.ExpenseType == "Cheque")
+                                {
+                                    <span>Check No: @expense.ChequeNo <br/> Bank Name: @expense.BankName</span>
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </td>
                             <td>@expense.Particular</td>
                         </tr>
                     }
@@ -57,7 +66,7 @@
                     <thead>
                     <tr>
                         <th colspan="2">Total</th>
-                        <th>@Model.Sum(x=>x.Amount)</th>
+                        <th style="text-align: center">@Model.Sum(x=>x.Amount)</th>
                         <th colspan="3"></th>
                     </tr>
                     </thead>

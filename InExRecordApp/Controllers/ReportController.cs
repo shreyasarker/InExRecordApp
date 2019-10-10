@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using InExRecordApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace InExRecordApp.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private AppDbContext _context;
@@ -63,6 +65,7 @@ namespace InExRecordApp.Controllers
                 year = DateTime.Now.Year;
             }
             var income = _context.Incomes
+                .Where(x => x.IsApproved)
                 .Where(x => x.Date.Year.Equals(year))
                 .GroupBy(x => x.Date.Month)
                 .Select(a => new
@@ -72,6 +75,7 @@ namespace InExRecordApp.Controllers
                 });
 
             var expense = _context.Expenses
+                .Where(x => x.IsApproved)
                 .Where(x => x.Date.Year.Equals(year))
                 .GroupBy(x => x.Date.Month)
                 .Select(a => new

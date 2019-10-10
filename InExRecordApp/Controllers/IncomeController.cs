@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using InExRecordApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace InExRecordApp.Controllers
 {
+    [Authorize]
     public class IncomeController : Controller
     {
         private readonly AppDbContext _context;
@@ -16,35 +19,35 @@ namespace InExRecordApp.Controllers
         {
             _context = context;
         }
-
+        
         [HttpGet]
         public IActionResult Store()
         {
+            if (User.IsInRole("SrAccountant"))
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Store(Income income)
         {
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    income.UserId = HttpContext.Session.GetInt32("userId").ToString();
                     _context.Incomes.Add(income);
                     _context.SaveChanges();
 
-                    return Json(new
-                    {
-                        success = true,
-                        redirecturl = Url.Action("Show", "Income"),
-                        message = "Data Submited!"
-                    });
+                    TempData["success"] = "Data Submited!";
+                    return RedirectToAction("Show", "Income");
                 }
                 catch (Exception e)
                 {
-                    return Json(new { success = false, message = e.Message });
+                    TempData["error"] = e.Message;
+                    return View();
                 }
                 
             }
@@ -72,10 +75,13 @@ namespace InExRecordApp.Controllers
                 }
                 _context.SaveChanges();
 
-                return Json(new { success = true, redirecturl = Url.Action("Show", "Income"), message = "Data approved!" });
+                TempData["success"] = "Data approved!";
+
+                return Json(new { success = true, redirecturl = Url.Action("Show", "Income") });
             }
             catch (Exception e)
             {
+                TempData["success"] = e.Message;
                 return Json(new { success = false, message = e.Message });
             }
         }

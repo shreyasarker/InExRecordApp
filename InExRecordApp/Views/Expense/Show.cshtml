@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "View Expense";
     int i = 0;
+    bool isSrAccount = User.IsInRole("SrAccountant");
 }
 
 
@@ -13,6 +14,20 @@
             <h4>View and approve pending Expense(s)</h4>
         </div>
         <div class="panel-body">
+            @if (TempData.ContainsKey("success"))
+            {
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> @TempData["success"].ToString()
+                </div>
+            }
+            else if (TempData.ContainsKey("error"))
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> @TempData["error"].ToString()
+                </div>
+            }
             <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="dataTable">
                     <thead>
@@ -21,31 +36,50 @@
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Cash/Cheque</th>
-                            <th>Bank Name</th>
+                            <th>Cheque Details</th>
                             <th>Particular</th>
-                            <th>Approve</th>
+                            @if (isSrAccount)
+                            {
+                                <th>Approve</th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (Expense expense in Model)
                         {
+                            i++;
                             <tr>
-                                <td>@{ i++; }</td>
+                                <td>@i</td>
                                 <td>@expense.Date.ToString("yyyy MMMM dd")</td>
                                 <td>@expense.Amount</td>
                                 <td>@expense.ExpenseType</td>
-                                <td>@expense.BankName</td>
+                                <td>
+                                    @if (expense.ExpenseType == "Cheque")
+                                    {
+                                        <span>Check No: @expense.ChequeNo <br/> Bank Name: @expense.BankName</span>
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </td>
                                 <td>@expense.Particular</td>
-                                <td class="checkbox text-center"><label><input name="isApproved[]" value="@expense.Id" type="checkbox" /></label></td>
+                                @if (isSrAccount)
+                                {
+                                    <td class="checkbox text-center"><label><input name="isApproved[]" value="@expense.Id" type="checkbox" /></label></td>
+                                }
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="panel-footer text-right">
-            <button class="btn btn-primary" id="save" type="submit">Save</button>
-        </div>
+        @if (isSrAccount)
+        {
+            <div class="panel-footer text-right">
+                <button class="btn btn-primary" id="save" type="submit">Save</button>
+            </div>
+        }
     </div>
 </div>
 
@@ -72,7 +106,7 @@
                         window.location.href = response.redirecturl;
                     }
                 }).fail(function(error) {
-
+                    console.log(error.responseText);
                 });
             });
         });

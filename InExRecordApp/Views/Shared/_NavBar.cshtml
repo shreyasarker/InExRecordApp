@@ -1,6 +1,9 @@
 ﻿@inject SignInManager<AppUser> signInManager;
 @inject UserManager<AppUser> UserManager;
 
+@{
+    bool isJrAccountant = User.IsInRole("JrAccountant");
+}
 <header class="header_area clearfix" style="background: lightseagreen;">
     <div class="container-fluid h-100">
         <div class="row h-100">
@@ -21,14 +24,20 @@
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Income</a>
                                         <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                            @if (isJrAccountant)
+                                            {
                                             <a asp-action="Store" asp-controller="Income" class="dropdown-item">Store</a>
+                                            }
                                             <a asp-action="Show" asp-controller="Income" class="dropdown-item">View</a>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="moshDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Expense</a>
                                         <div class="dropdown-menu" aria-labelledby="moshDropdown">
+                                            @if (isJrAccountant)
+                                            {
                                             <a asp-action="Store" asp-controller="Expense" class="dropdown-item">Store</a>
+                                            }
                                             <a asp-action="Show" asp-controller="Expense" class="dropdown-item">View</a>
                                         </div>
                                     </li>
@@ -43,7 +52,7 @@
                                 </ul>
                                 <div class="login-register-btn">
                                     <form method="post" asp-action="Logout" asp-controller="Account">
-                                        <button type="submit" style="color: white; font-size: 18px;" href="#">Logout</button>
+                                        <button type="submit" style="color: white; font-size: 18px; background: none; border: none; cursor: pointer">Logout</button>
                                     </form>
                                 </div>
                             }
