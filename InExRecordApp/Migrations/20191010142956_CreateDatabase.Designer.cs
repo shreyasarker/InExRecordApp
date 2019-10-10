@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InExRecordApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191010104454_CreateDatabase")]
+    [Migration("20191010142956_CreateDatabase")]
     partial class CreateDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

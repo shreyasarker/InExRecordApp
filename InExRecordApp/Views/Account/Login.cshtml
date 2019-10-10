@@ -1,6 +1,6 @@
-﻿@model AppUser
+﻿@model LoginViewModel
 
-@*@{
+@{
     ViewBag.Title = "Login";
 }
 
@@ -22,6 +22,7 @@
             }
 
             <form method="post" asp-controller="Account" asp-action="Login" class="login100-form">
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="wrap-input100 validate-input m-b-26">
                     <span class="label-input100">Email</span>
                     <input asp-for="Email" class="input100" type="text" placeholder="Enter email address" value="sen@gmail.com">
@@ -31,9 +32,18 @@
 
                 <div class="wrap-input100 validate-input m-b-18">
                     <span class="label-input100">Password</span>
-                    <input asp-for="Password" class="input100" type="password" placeholder="Enter password" value="12345678">
+                    <input asp-for="Password" class="input100" type="password" placeholder="Enter password" value="P@@$$w0rd">
                     <span class="focus-input100"></span>
                     <span asp-validation-for="Password" class="error-text text-danger"></span>
+                </div>
+                
+                <div class="flex-sb-m w-full p-b-30">
+                    <div class="contact100-form-checkbox">
+                        <input asp-for="RememberMe" class="input-checkbox100" type="checkbox">
+                        <label asp-for="RememberMe" class="label-checkbox100">
+                            Remember me
+                        </label>
+                    </div>
                 </div>
 
                 <div class="container-login100-form-btn">
@@ -51,4 +61,4 @@
             </form>
         </div>
     </div>
-</div>*@
+</div>

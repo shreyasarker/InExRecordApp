@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Rotativa.AspNetCore;
 
 namespace InExRecordApp
 {
@@ -44,18 +43,14 @@ namespace InExRecordApp
                     options.Password.RequiredLength = 8;
                     options.Password.RequiredUniqueChars = 0;
                     options.Password.RequireUppercase = false;
-                }).AddEntityFrameworkStores<AppDbContext>();
+                }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             services.AddDbContext<AppDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("InExRecordDBConnection")));
 
-            services.AddSession();
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => false;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            services.Configure<PasswordHasherOptions>(options =>
+                options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2
+            );
             //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
             services.AddAntiforgery(options =>
             {
@@ -80,9 +75,7 @@ namespace InExRecordApp
             //{
             //    await context.Response.WriteAsync("Hi!");
             //});
-            app.UseSession();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
             app.UseAuthentication();
 
             app.UseMvc(routes =>

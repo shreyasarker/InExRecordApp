@@ -22,7 +22,7 @@ namespace InExRecordApp.Seeder
 
            
 
-            string password = "12345678";
+            string password = "P@$$w0rd";
 
             if (await roleManager.FindByNameAsync(srAccountant) == null)
             {

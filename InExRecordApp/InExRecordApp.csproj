@@ -9,29 +9,26 @@
     <Compile Remove="Gateway\**" />
     <Compile Remove="Manager\**" />
     <Compile Remove="Views\Layout\**" />
+    <Compile Remove="wwwroot\Rotativa\**" />
     <Content Remove="Gateway\**" />
     <Content Remove="Manager\**" />
     <Content Remove="Views\Layout\**" />
+    <Content Remove="wwwroot\Rotativa\**" />
     <EmbeddedResource Remove="Gateway\**" />
     <EmbeddedResource Remove="Manager\**" />
     <EmbeddedResource Remove="Views\Layout\**" />
+    <EmbeddedResource Remove="wwwroot\Rotativa\**" />
     <None Remove="Gateway\**" />
     <None Remove="Manager\**" />
     <None Remove="Views\Layout\**" />
+    <None Remove="wwwroot\Rotativa\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.11" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
-    <PackageReference Include="Rotativa.AspNetCore" Version="1.1.1" />
-    <PackageReference Include="Syncfusion.HtmlToPdfConverter.QtWebKit.Net.Core" Version="17.3.0.14" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Rotativa\" />
   </ItemGroup>
 
 </Project>

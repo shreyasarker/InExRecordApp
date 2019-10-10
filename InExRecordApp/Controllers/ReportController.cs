@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Rotativa.AspNetCore;
-using Syncfusion.HtmlConverter;
 
 namespace InExRecordApp.Controllers
 {
