@@ -5,5 +5,5 @@ A company can keep their Daily Income and Expense using this software system and
 ### How to run ###
 
 * First clone the project
-* Before run the project run "Update-Database" command through Package Manager Console.
+* Before running the project run "Update-Database" command through Package Manager Console.
 * That's It...You are ready to go !
